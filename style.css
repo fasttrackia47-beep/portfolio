@@ -122,7 +122,7 @@ img{display:block;max-width:100%}
 .kcard__facts div{display:grid;grid-template-columns:168px minmax(0,1fr);gap:18px;padding:14px 0;border-bottom:1px solid var(--on-3);font-size:14.5px}
 .kcard__facts dt{color:var(--on-2)}
 .kcard__facts dd{font-weight:500}
-.kcard__btns{margin-top:30px;display:flex;gap:12px}
+.kcard__btns{margin-top:20px;display:flex;gap:12px}
 
 /* ---- variant: лёгкая тональность — бледная подложка в цвете кейса, тёмный текст ---- */
 .kcard--light{border:1px solid color-mix(in srgb, var(--tone) 26%, white)}
@@ -350,7 +350,7 @@ img{display:block;max-width:100%}
 
 [data-variant="b"] .kcard__panel--b{display:flex;flex-direction:column}
 [data-variant="b"] #cases>.case{order:var(--ob)}
-[data-variant="b"] .kcard__lead{margin-top:14px;font-size:17px;line-height:1.5;color:rgba(15,15,15,.72);max-width:60ch}
+[data-variant="b"] .kcard__lead{margin-top:14px;font-size:17px;line-height:1.5;color:var(--ink);font-weight:400;max-width:60ch}
 [data-variant="b"] .kcard__panel--b .kcard__facts{margin-top:28px}
 .xp__link+.xp__link{margin-left:26px}
 [data-variant="b"] .study__list li{grid-template-columns:260px minmax(0,1fr) auto}
@@ -410,23 +410,11 @@ img{display:block;max-width:100%}
 /* кнопка «Проект» рядом с «Кейс» */
 [data-variant="b"] .kcard__btns .pill--outline{display:inline-flex;align-items:center;gap:6px}
 
-/* ===== B: переключатель типографики ===== */
+/* ===== B: шрифты (заголовки — Literata, текст — IBM Plex Sans) ===== */
 
-/* заголовки: 1 · Literata (книжная антиква), 2 · Manrope (геометричный гротеск) */
 [data-variant="b"][data-type="1"]{--f-hero:"Literata",Georgia,serif;--f-display:"Literata",Georgia,serif}
 [data-variant="b"][data-type="1"] .hero__h{font-weight:500;letter-spacing:0;font-size:42px;line-height:1.18}
-[data-variant="b"][data-type="2"]{--f-hero:"Manrope","Golos Text",sans-serif;--f-display:"Manrope","Golos Text",sans-serif}
-[data-variant="b"][data-type="2"] .hero__h{font-weight:700;letter-spacing:0;font-size:42px;line-height:1.12}
-[data-variant="b"][data-type="2"] .kcard__title{letter-spacing:0;font-weight:700}
-/* наборный текст: пары к каждому заголовочному шрифту */
-[data-variant="b"][data-type="1"][data-body="1"]{--f-body:"Golos Text",sans-serif}
-[data-variant="b"][data-type="1"][data-body="2"]{--f-body:"Onest",sans-serif}
 [data-variant="b"][data-type="1"][data-body="3"]{--f-body:"IBM Plex Sans",sans-serif}
-[data-variant="b"][data-type="1"][data-body="4"]{--f-body:"Source Sans 3",sans-serif}
-[data-variant="b"][data-type="2"][data-body="1"]{--f-body:"Source Serif 4",Georgia,serif}
-[data-variant="b"][data-type="2"][data-body="2"]{--f-body:"PT Serif",Georgia,serif}
-[data-variant="b"][data-type="2"][data-body="3"]{--f-body:"Inter",sans-serif}
-[data-variant="b"][data-type="2"][data-body="4"]{--f-body:"Literata",Georgia,serif}
 [data-variant="b"]{--f-geist:var(--f-body)}
 [data-variant="b"] .kcard__panel--b{font-family:var(--f-body)}
 [data-variant="b"] .hero__lead{font-family:var(--f-body);font-weight:400;font-size:17px}
@@ -446,7 +434,7 @@ img{display:block;max-width:100%}
 [data-variant="b"] #case-ats .kcard{--bg:rgba(223,230,246,.5)}   /* #DFE6F6 */
 [data-variant="b"] #case-federation .kcard{--bg:rgba(239,230,244,.5)}   /* #EFE6F4 */
 [data-variant="b"] #case-folders .kcard{--bg:rgba(227,223,246,.5)}   /* #E3DFF6 */
-[data-variant="b"] #case-digitalagro .kcard{--bg:rgba(201,237,206,.25)}   /* #C9EDCE зелень */
+[data-variant="b"] #case-fms .kcard{--bg:rgba(201,237,206,.25)}   /* #C9EDCE зелень */
 [data-variant="b"] #case-autotech .kcard{--bg:rgba(210,231,249,.25)}   /* #D2E7F9 небесный */
 [data-variant="b"] .kcard__panel,[data-variant="b"] #case-ats .kcard__panel{padding-inline:42px}
 
@@ -707,7 +695,7 @@ html[data-variant="b"]{overflow-x:clip}
 
 /* ---- шторка кейса: плотнее ритм, серые подзаголовки, жирнее заголовок, уже панель ---- */
 .sheet__dialog{width:720px}
-[data-variant="b"] .sheet__in{--s-sec:32px;--s-label:6px;--s-p:8px;--s-media:20px;padding:38px 48px 80px}
+[data-variant="b"] .sheet__in{--s-sec:24px;--s-label:6px;--s-p:8px;--s-media:20px;padding:38px 48px 80px}
 [data-variant="b"] .case__title{font-weight:700;letter-spacing:0}
 [data-variant="b"] .case__sec h3,[data-variant="b"] .sheet__in .case__sec h3.meta{color:rgba(15,15,15,.45);font-weight:500}
 [data-variant="b"] .case__sec p,[data-variant="b"] .case__lead,[data-variant="b"] .case__note{max-width:600px}
@@ -806,3 +794,54 @@ html[data-variant="b"]{overflow-x:clip}
 [data-variant="b"] .sidebar__photo img{object-position:50% 0;transform:translateY(10px)}
 [data-variant="b"] .hero__lead{max-width:min(820px,100%)}
 [data-variant="b"] .anchors li>span:not(.anchors__ico){max-width:none}
+
+/* ===== кейс — модальное окно по центру ===== */
+[data-variant="b"] .sheet.is-open{display:flex;align-items:center;justify-content:center;padding:32px}
+[data-variant="b"] .sheet__backdrop{background:rgba(15,15,15,.5)}
+[data-variant="b"] .sheet__dialog{position:relative;inset:auto;top:auto;right:auto;bottom:auto;width:min(696px,100%);max-height:100%;border:0;border-radius:20px;box-shadow:0 24px 80px rgba(15,15,15,.28);transform:translateY(16px) scale(.985);transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .25s}
+[data-variant="b"] .sheet.is-in .sheet__dialog{transform:none;opacity:1}
+[data-variant="b"] .sheet__close{top:20px;margin:20px 20px 0 0}
+[data-variant="b"] .sheet__in{padding-top:28px}
+@media (max-width:760px){
+  [data-variant="b"] .sheet.is-open{padding:12px}
+  [data-variant="b"] .sheet__dialog{border-radius:16px}
+  [data-variant="b"] .sheet__in{padding-inline:24px}
+}
+
+/* ===== Карточки кейсов: оптический ритм =====
+   Зазоры считаются от кромки текста (сверху — высота заглавной, снизу — базовая линия), а не от строчных боксов:
+   text-box-trim убирает межстрочный и шрифтовой «воздух», поэтому padding/margin = видимый зазор.
+   --kc-edge: рамка карточки (слева, сверху от картинки, снизу под кнопками); --kc-gap: зазор между блоками;
+   --kc-pair: связка «заголовок — подпись»; --kc-row: отступ строки таблицы; --kc-col: зазор между подписью и значением в таблице. */
+[data-variant="b"] .kcard__panel--b{--kc-edge:36px;--kc-gap:32px;--kc-pair:32px;--kc-row:16px;--kc-col:28px}
+/* Все карточки: рамка 36 px; зазоры между блоками 32 (заголовок—подпись, подпись—таблица, таблица—кнопки); вокруг линии таблицы 16+16; зазор до значения в таблице = рамка − 8; заголовок и подпись шириной до 700 px. */
+[data-variant="b"] #case-ats .kcard__media{height:calc(280px + var(--r))}
+[data-variant="b"] .kcard__panel,[data-variant="b"] #case-ats .kcard__panel{padding-inline:var(--kc-edge)}   /* перебивает прежние 42px */
+[data-variant="b"] .kcard .kcard__panel--b{padding:var(--kc-edge)}
+[data-variant="b"] .kcard__panel--b :is(.kcard__title,.kcard__lead,.kcard__facts dt,.kcard__facts dd){text-box:trim-both cap alphabetic}
+[data-variant="b"] .kcard__panel--b .kcard__title{margin:0}
+[data-variant="b"] .kcard__panel--b :is(.kcard__title,.kcard__lead){max-width:700px}
+[data-variant="b"] #case-ats .kcard__title{font-size:28px}
+[data-variant="b"] .kcard__panel--b .kcard__lead{margin-top:var(--kc-pair);font-size:14px;line-height:1.5;color:var(--ink);font-weight:400;text-wrap:pretty}
+
+/* таблица: общая колонка подписей по ширине самой длинной подписи («Роль в проекте»); внутренние отступы строк не добавляют лишнего снаружи */
+[data-variant="b"] .kcard__panel--b .kcard__facts{margin-top:var(--kc-gap);display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:var(--kc-col)}
+[data-variant="b"] .kcard__panel--b .kcard__facts>div{display:grid;grid-template-columns:subgrid;grid-column:1/-1;gap:normal;padding:var(--kc-row) 0}
+[data-variant="b"] .kcard__panel--b .kcard__facts>div:first-child{padding-top:0}
+[data-variant="b"] .kcard__panel--b .kcard__facts>div:last-child{padding-bottom:0}
+[data-variant="b"] .kcard__panel--b .kcard__facts dt,[data-variant="b"] .kcard__panel--b .kcard__facts dd{color:rgba(15,15,15,.72);font-weight:400}
+[data-variant="b"] .kcard__panel--b .kcard__btns{margin-top:var(--kc-gap)}
+
+/* ===== Модалка кейса: результаты и ссылки ===== */
+/* заметки результатов — список с висячим тире (как .xp__items), текст остаётся в колонке */
+[data-variant="b"] .case__notes{margin:0;padding:0}
+[data-variant="b"] .case__notes .case__note{position:relative}
+[data-variant="b"] .case__notes .case__note::before{content:"";position:absolute;left:-18px;top:.8em;width:7px;height:1px;background:rgba(15,15,15,.45)}
+/* метрики результатов во всех кейсах: число 20 px (вариант «мельче»), подпись 6 px под ним */
+[data-variant="b"] .case__metrics b{font-size:20px;line-height:1.1}
+[data-variant="b"] .case__metrics span{margin-top:6px}
+/* несколько ссылок в строке таблицы — в одну линию через запятую */
+[data-variant="b"] .case__sheet-facts dd.is-inline a{display:inline;overflow:visible;white-space:normal;text-overflow:clip}
+
+/* Модалка: заголовок 32 px на всю колонку (580 px) — справа остаётся запас до кнопки закрытия */
+[data-variant="b"] .case__title{font-size:32px;max-width:580px;text-wrap:pretty}
