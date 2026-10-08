@@ -108,11 +108,11 @@ const CASES = {
       'В задачах, связанных с безопасностью, важна не только чистота интерфейса, но и цена ошибки. Иногда заметная индикация полезнее ненавязчивого решения.',
       'Для меня этот проект про баланс привычных сценариев, прав доступа и безопасности: пользователь должен работать как обычно, но всегда понимать, когда выходит за границы своей организации.'
     ],
-    tileFrame:'assets/images/federation/00-cover.webp',
+    tileFrame:'assets/images/federation/00-cover.webp?v=4',
     b:{ headline:'МТС Линк: федерация для 15+ клиентов и 30+ млн ₽ потенциальных контрактов', lead:'Федерация была блокером покупки для 15+ клиентов. Как единственный дизайнер в рабочей группе я проработал межкорпоративные сценарии, роли и права доступа, спроектировал клиентскую часть для Web, iOS и Android и проверил ключевые решения на пользователях', /* «Роль в проекте» / «Использовал» скрыты по решению автора; вернуть — переименовать rowsHidden → rows */ rowsHidden:[['Роль в проекте','Senior Product Designer · клиентская часть, Web, iOS и Android'],['Использовал','Карта процессов, качественные исследования, UX‑тесты, моделирование ролей и прав доступа']] }
   },
   folders: {
-    slug:'folders', company:'МТС Линк', type:'Папки для чатов и каналов', year:'2026', tone:'plum', layout:'main',
+    slug:'folders', company:'МТС Линк', type:'Папки для чатов и каналов', year:'2026', tone:'plum', layout:'main', hideLead:true,
     tileFrame:'assets/images/folders/00-cover.webp?v=3',
     chip:'Корпоративные коммуникации',
     title:'Как навести порядок в чатах и каналах',
@@ -370,7 +370,7 @@ const SKZ = {
       ...rowsOf(3, 486, 74.5, y => [R(550, y, 26, 26, 8, '#E4E7EE'), R(611, y, 90, 16, 6, '#E4E7EE'), R(611, y + 24, 300, 12, 5, '#E4E7EE'), R(995, y + 8, 70, 36, 18, '#DAD6F3')])] },
     { x: 498, y: 708, w: 608, h: 144, bg: '#FDFDFE', rad: '0 0 44px 44px', s: [R(536, 726, 200, 20), R(515, 758, 570, 74, 30, '#F1F2F6'), R(536, 784, 170, 20, 6, '#E4E7EE')] }
   ] },
-  federation: { w: 1600, h: 1017, zones: [
+  federation: { w: 1600, h: 1017, ar: 1800 / 840, zones: [
     { x: 0, y: 0, w: 452, h: 1017, bg: '#fff', s: [R(34, 36, 72, 26, 8), R(372, 22, 56, 56, 28), R(10, 95, 430, 62, 31),
       ...rowsOf(7, 177, 71, y => [R(16, y, 56, 56, 28), R(90, y + 14, 190, 18, 7), R(90, y + 38, 110, 12, 5)]), R(38, 760, 260, 18, 7)] },
     { x: 454, y: 0, w: 1146, h: 800, bg: '#FDFCFE', s: [R(474, 22, 56, 56, 28), R(585, 36, 270, 26, 8), R(1522, 22, 56, 56, 28),
@@ -400,7 +400,7 @@ const SKZ = {
 };
 const skCover = (p, alt) => {
   const K = SKZ[p.slug]; if (!K) return '';
-  return `<div class="kcover kcover--sk" style="--k-step:calc(${(1.7 / (K.zones.length - 1)).toFixed(3)}s / var(--sp))" role="img"aria-label="${esc(alt)}"><div class="kcover__stage" style="aspect-ratio:${K.w}/${K.h}"><img class="kcover__base" src="${p.tileFrame}" alt="" loading="lazy" data-ph="hide">` +
+  return `<div class="kcover kcover--sk" style="--k-step:calc(${(1.7 / (K.zones.length - 1)).toFixed(3)}s / var(--sp))" role="img"aria-label="${esc(alt)}"><div class="kcover__stage" style="aspect-ratio:${K.ar || K.w / K.h}"><img class="kcover__base" src="${p.tileFrame}" alt="" loading="lazy" data-ph="hide">` +
     K.zones.map((z, i) => `<div class="kcover__sk" style="left:${(z.x / K.w * 100).toFixed(3)}%;top:${(z.y / K.h * 100).toFixed(3)}%;width:${(z.w / K.w * 100).toFixed(3)}%;height:${(z.h / K.h * 100).toFixed(3)}%;background:${z.bg};${z.rad ? `border-radius:${z.rad};` : ''}--i:${i}"><svg viewBox="0 0 ${z.w} ${z.h}" preserveAspectRatio="none" aria-hidden="true">${z.s.map(([x, y, w, h, r, f]) => `<rect x="${(x - z.x).toFixed(1)}" y="${(y - z.y).toFixed(1)}" width="${w}" height="${h}" rx="${r}" fill="${f || '#E8EDF2'}"/>`).join('')}</svg></div>`).join('') + '</div></div>';
 };
 function kcard(p, variant) {

@@ -1304,6 +1304,13 @@ html[data-variant="b"]{overflow-x:clip}
 .lnk__ar{display:inline-block;margin-left:5px;font-size:.78em;line-height:1;text-decoration:none}
 [data-variant="b"] .kcard__btns .pill--outline span{font-size:11px;line-height:1}
 
+/* hover у внешних ссылок в таблице фактов (исследование, сборка, Behance…): мягкая подложка, стрелка чуть уходит вверх-вправо */
+[data-variant="b"] .case__sheet-facts dd a{width:fit-content;max-width:100%;border-radius:4px;transition:background-color .18s ease,box-shadow .18s ease}
+[data-variant="b"] .case__sheet-facts dd a:hover,[data-variant="b"] .case__sheet-facts dd a:focus-visible{background-color:rgba(15,15,15,.07);box-shadow:0 0 0 3px rgba(15,15,15,.07)}
+.lnk__ar{transition:transform .18s ease}
+a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
+@media (prefers-reduced-motion:reduce){[data-variant="b"] .case__sheet-facts dd a,.lnk__ar{transition:none}}
+
 /* зум изображения в шторке */
 .zoom{position:fixed;inset:0;z-index:500;background:rgba(15,15,15,.82);display:grid;place-items:center;padding:24px;cursor:zoom-out}
 .zoom__img{max-width:96vw;max-height:92vh;width:auto;height:auto;object-fit:contain;border-radius:12px;background:#fff;cursor:default;box-shadow:0 20px 60px rgba(0,0,0,.4)}
