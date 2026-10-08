@@ -183,9 +183,9 @@ img{display:block;max-width:100%}
 .study__list{margin-top:13px}
 /* [институт] [название курса] [год] — заподлицо слева, год прижат вправо */
 .study__list li{display:grid;grid-template-columns:230px minmax(0,1fr) auto;column-gap:var(--gap);align-items:baseline;padding:13px 0;border-bottom:1px solid var(--rule-soft);font-size:13.5px}
-.study__list li span:nth-child(1){color:var(--ink-55)}
-.study__list li span:nth-child(2){color:var(--ink)}
-.study__list li span:nth-child(3){color:var(--ink-55);white-space:nowrap;text-align:right}
+.study__list li span:nth-child(1){color:var(--ink)}
+.study__list li span:nth-child(1) i{font-style:normal;color:var(--ink-55)}
+.study__list li span:nth-child(2){color:var(--ink-55);white-space:nowrap;text-align:right}
 
 /* ================= CONTACTS ================= */
 
@@ -247,7 +247,7 @@ img{display:block;max-width:100%}
    аватар 140px → заголовок 54/54 Geist 500 по центру → проекты: слева клиент+описание, справа период+роль,
    под ними медиа 1160×700 (r8, #F9F9F9). Расстояния: аватар→заголовок 16, заголовок→первый проект 140,
    шапка проекта→медиа 20, медиа→следующий проект 80. Серый #ABABAB, чёрный #0F0F0F. */
-[data-variant="b"] body{width:auto;min-width:1024px}
+[data-variant="b"] body{width:auto;min-width:0}
 [data-variant="b"]{--ink:#0F0F0F;--b-gray:#ABABAB;--f-geist:"Geist","Golos Text",sans-serif}
 [data-variant="b"] .page-wrapper{display:block;max-width:var(--container);margin-inline:auto;padding:144px 0 120px;min-height:0}
 [data-variant="b"] .sidebar{position:static;height:auto;background:none;border-radius:0;padding:0;overflow:visible}
@@ -291,7 +291,7 @@ img{display:block;max-width:100%}
 [data-variant="b"]{--f-display:"Playfair Display","Golos Text",serif;--f-hero:"Playfair Display","Golos Text",serif}
 [data-variant="b"] .hero__h{font-weight:500;letter-spacing:0;line-height:1.1}   /* 54px / 59px */
 [data-variant="b"] .kcard__title,[data-variant="b"] .work__head h2,[data-variant="b"] .xp__co,[data-variant="b"] .work__head h3{font-weight:600;letter-spacing:0}
-[data-variant="b"] .kcard__title{font-size:32px;line-height:1.25}
+[data-variant="b"] .kcard__title{font-size:28px;line-height:1.25}
 [data-variant="b"] .work__head h2{line-height:1.35}
 
 /* опыт и контакты — в той же колонке */
@@ -301,11 +301,11 @@ img{display:block;max-width:100%}
 
 /* ===== B: акценты в сетке карточек ===== */
 /* 01 — медиа в край: без полей слева, справа и сверху; скругление верха задаёт сама карточка */
-[data-variant="b"] #case-ats .kcard__media{height:calc(var(--media-h) + var(--gutter));padding:0}
-[data-variant="b"] #case-ats .kcard__media img{border-radius:0}
+[data-variant="b"] .kcard__media{height:calc(var(--media-h) + var(--gutter));padding:0}
+[data-variant="b"] .kcard__media img{border-radius:0}
 /* 03 — скругление +50% (40 → 60); вложенный радиус медиа = 60 − 28 */
 [data-variant="b"] #case-folders .kcard{border-radius:calc(var(--r)*1.5)}
-[data-variant="b"] #case-folders .kcard__media img,[data-variant="b"] #case-folders .kcard__media .frame{border-radius:calc(var(--r)*1.5 - var(--gutter))}
+[data-variant="b"] #case-folders .kcard__media .frame{border-radius:calc(var(--r)*1.5 - var(--gutter))}
 
 /* ===== B: опыт и учёба =====
    [№] [компания ………… роль · период] [+]. Ховер — плоская подложка на всю строку, без скруглений;
@@ -322,8 +322,7 @@ img{display:block;max-width:100%}
 [data-variant="b"] .xp__about,[data-variant="b"] .xp__items li,[data-variant="b"] .xp__link{font-size:15px}
 [data-variant="b"] .xp__about,[data-variant="b"] .xp__items{max-width:68ch}
 [data-variant="b"] .xp__items li::before{left:-20px}
-[data-variant="b"] .study__list li{padding:16px 0;font-size:15px;transition:background .25s,padding .3s cubic-bezier(.2,.8,.3,1)}
-[data-variant="b"] .study__list li:hover{background:var(--paper-2);padding-inline:20px}
+[data-variant="b"] .study__list li{padding:16px 0;font-size:15px}
 
 /* ===== B: «дрожание» заголовка (механика kirill.si): 5 SVG-фильтров feTurbulence + feDisplacementMap,
    переключаются ступенями 5 кадров за 0.5s. Выключено на тач-устройствах и при prefers-reduced-motion ===== */
@@ -353,7 +352,7 @@ img{display:block;max-width:100%}
 [data-variant="b"] .kcard__lead{margin-top:14px;font-size:17px;line-height:1.5;color:var(--ink);font-weight:400;max-width:60ch}
 [data-variant="b"] .kcard__panel--b .kcard__facts{margin-top:28px}
 .xp__link+.xp__link{margin-left:26px}
-[data-variant="b"] .study__list li{grid-template-columns:260px minmax(0,1fr) auto}
+[data-variant="b"] .study__list li{grid-template-columns:minmax(0,1fr) auto}
 
 /* ===== B: первый блок — приветствие, лид и «якоря» вместо метрик ===== */
 [data-variant="b"]{--accent:#EBF0F5}
@@ -363,6 +362,7 @@ img{display:block;max-width:100%}
 [data-variant="b"] .anchors li{display:flex;flex-direction:column;gap:18px;font-size:18px;line-height:1.4;color:var(--ink);max-width:24ch}
 [data-variant="b"] .anchors__ico{width:60px;height:60px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
 [data-variant="b"] .anchors__ico svg{width:26px;height:26px;fill:var(--ink)}
+[data-variant="b"] .anchors__emo{font-size:26px;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 [data-variant="b"] .work{padding-top:88px}
 
 /* ===== B: карточки — очень холодные, прозрачные слоистые фоны (у каждой своя механика и оттенок) ===== */
@@ -405,7 +405,6 @@ img{display:block;max-width:100%}
 [data-variant="b"] .hero__lead{font-family:var(--f-hero);font-weight:500;font-size:16px;line-height:1.5;letter-spacing:0}
 [data-variant="b"] .hero__lead{max-width:680px}
 [data-variant="b"] .sidebar__photo{width:150px;height:180px;border-radius:60px}
-[data-variant="b"] .study{display:none}
 
 /* кнопка «Проект» рядом с «Кейс» */
 [data-variant="b"] .kcard__btns .pill--outline{display:inline-flex;align-items:center;gap:6px}
@@ -423,20 +422,20 @@ img{display:block;max-width:100%}
 [data-variant="b"] .kcard .kcard__facts{border-top:0}
 [data-variant="b"] .kcard__panel--b .kcard__facts{margin-top:20px}
 [data-variant="b"] .kcard .kcard__facts div:last-child{border-bottom:0}
-[data-variant="b"] #case-ats .kcard{--bg:rgba(235,240,245,.75)}
-[data-variant="b"] #case-ats .kcard__panel{padding-inline:42px}
+[data-variant="b"] .kcard{--bg:rgba(235,240,245,.75)}
+[data-variant="b"] .kcard__panel{padding-inline:42px}
 
 [data-variant="b"] .pill.is-soon{opacity:.5;cursor:default}
 /* названия компаний в «Опыте» — компактнее (были 28px) */
 [data-variant="b"] .xp__co{font-size:22px;line-height:1.3}
 
 /* ===== B: единая палитра карточек — оттенки тональности Sense (#EBF0F5), непрозрачность 50% ===== */
-[data-variant="b"] #case-ats .kcard{--bg:rgba(223,230,246,.5)}   /* #DFE6F6 */
+[data-variant="b"] .kcard{--bg:rgba(223,230,246,.5)}   /* #DFE6F6 */
 [data-variant="b"] #case-federation .kcard{--bg:rgba(239,230,244,.5)}   /* #EFE6F4 */
 [data-variant="b"] #case-folders .kcard{--bg:rgba(227,223,246,.5)}   /* #E3DFF6 */
 [data-variant="b"] #case-fms .kcard{--bg:rgba(201,237,206,.25)}   /* #C9EDCE зелень */
 [data-variant="b"] #case-autotech .kcard{--bg:rgba(210,231,249,.25)}   /* #D2E7F9 небесный */
-[data-variant="b"] .kcard__panel,[data-variant="b"] #case-ats .kcard__panel{padding-inline:42px}
+[data-variant="b"] .kcard__panel,[data-variant="b"] .kcard__panel{padding-inline:42px}
 
 /* ===== B: новое фото (4:5 → почти квадрат) ===== */
 .ph-b{display:none}
@@ -579,9 +578,9 @@ html[data-variant="b"]{overflow-x:clip}
 .case__story .case__media figure:only-child img,.case__story .case__media img{aspect-ratio:auto;height:auto}
 
 /* Sense Group (ats): плашка наезжает на изображение, в углах — картинка */
-[data-variant="b"] #case-ats .kcard{background:transparent}
-[data-variant="b"] #case-ats .kcard__media{height:calc(var(--media-h) + var(--gutter) + var(--r))}
-[data-variant="b"] #case-ats .kcard__panel--b{position:relative;margin-top:calc(var(--r) * -1);border-radius:var(--r);background:color-mix(in srgb, rgb(223 230 246) 50%, #fff)}
+[data-variant="b"] .kcard{background:transparent}
+[data-variant="b"] .kcard__media{height:calc(var(--media-h) + var(--gutter) + var(--r))}
+[data-variant="b"] .kcard__panel--b{position:relative;margin-top:calc(var(--r) * -1);border-radius:var(--r);background:color-mix(in srgb, rgb(223 230 246) 50%, #fff)}
 
 /* ================= DRAWER (B): начертания по референсу, чёрный текст, без видимого скролла ================= */
 .sheet{z-index:300}
@@ -746,7 +745,7 @@ html[data-variant="b"]{overflow-x:clip}
 [data-variant="b"]{--hero-M:100px;--exp-gap:100px;--fgap:140px}
 [data-variant="b"] .anchors{margin-top:100px}
 /* «Опыт» = размеру заголовка карточки (32px); названия компаний меньше (28px) */
-[data-variant="b"] .exp--v6 .work__head h2{font-size:32px;line-height:1.25}
+[data-variant="b"] .exp--v6 .work__head h2,[data-variant="b"] .exp--v6 .work__head h3{font-size:32px;line-height:1.25}
 [data-variant="b"] .exp--v6 .xp__co{font-size:28px;line-height:1.25}
 /* плюсики крупнее */
 [data-variant="b"] .exp--v6 .xp__head{grid-template-columns:44px minmax(0,1fr) 40px}
@@ -815,13 +814,12 @@ html[data-variant="b"]{overflow-x:clip}
    --kc-pair: связка «заголовок — подпись»; --kc-row: отступ строки таблицы; --kc-col: зазор между подписью и значением в таблице. */
 [data-variant="b"] .kcard__panel--b{--kc-edge:36px;--kc-gap:32px;--kc-pair:32px;--kc-row:16px;--kc-col:28px}
 /* Все карточки: рамка 36 px; зазоры между блоками 32 (заголовок—подпись, подпись—таблица, таблица—кнопки); вокруг линии таблицы 16+16; зазор до значения в таблице = рамка − 8; заголовок и подпись шириной до 700 px. */
-[data-variant="b"] #case-ats .kcard__media{height:calc(280px + var(--r))}
-[data-variant="b"] .kcard__panel,[data-variant="b"] #case-ats .kcard__panel{padding-inline:var(--kc-edge)}   /* перебивает прежние 42px */
+[data-variant="b"] .kcard__media{height:calc(280px + var(--r))}
+[data-variant="b"] .kcard__panel,[data-variant="b"] .kcard__panel{padding-inline:var(--kc-edge)}   /* перебивает прежние 42px */
 [data-variant="b"] .kcard .kcard__panel--b{padding:var(--kc-edge)}
 [data-variant="b"] .kcard__panel--b :is(.kcard__title,.kcard__lead,.kcard__facts dt,.kcard__facts dd){text-box:trim-both cap alphabetic}
 [data-variant="b"] .kcard__panel--b .kcard__title{margin:0}
 [data-variant="b"] .kcard__panel--b :is(.kcard__title,.kcard__lead){max-width:700px}
-[data-variant="b"] #case-ats .kcard__title{font-size:28px}
 [data-variant="b"] .kcard__panel--b .kcard__lead{margin-top:var(--kc-pair);font-size:14px;line-height:1.5;color:var(--ink);font-weight:400;text-wrap:pretty}
 
 /* таблица: общая колонка подписей по ширине самой длинной подписи («Роль в проекте»); внутренние отступы строк не добавляют лишнего снаружи */
@@ -836,7 +834,7 @@ html[data-variant="b"]{overflow-x:clip}
 /* заметки результатов — список с висячим тире (как .xp__items), текст остаётся в колонке */
 [data-variant="b"] .case__notes{margin:0;padding:0}
 [data-variant="b"] .case__notes .case__note{position:relative}
-[data-variant="b"] .case__notes .case__note::before{content:"";position:absolute;left:-18px;top:.8em;width:7px;height:1px;background:rgba(15,15,15,.45)}
+[data-variant="b"] .case__notes .case__note::before{content:"";position:absolute;left:-18px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--ink)}
 /* метрики результатов во всех кейсах: число 20 px (вариант «мельче»), подпись 6 px под ним */
 [data-variant="b"] .case__metrics b{font-size:20px;line-height:1.1}
 [data-variant="b"] .case__metrics span{margin-top:6px}
@@ -845,3 +843,475 @@ html[data-variant="b"]{overflow-x:clip}
 
 /* Модалка: заголовок 32 px на всю колонку (580 px) — справа остаётся запас до кнопки закрытия */
 [data-variant="b"] .case__title{font-size:32px;max-width:580px;text-wrap:pretty}
+
+
+/* ============================ АДАПТИВ: 1023 → 320 ============================
+   Схема: колонка 900 px сжимается до ширины экрана с боковым полем; на ≤760 меняются масштаб и ритм (токены), а не только «в столбик»:
+   карточка — рамка 24, заголовок 26; таблица ≤560 — подпись над значением; «Опыт» — номер + название, период под ним;
+   футер — надпись и рука в ряд, ссылки под ними. Десктоп (>960) не затронут. */
+@media (max-width:960px){
+  [data-variant="b"] .case__title{font-size:28px}
+  [data-variant="b"] .page-wrapper{padding-inline:24px}
+  [data-variant="b"] .sidebar__links{max-width:calc(100vw - 16px)}
+}
+@media (max-width:960px){
+  /* футер */
+  [data-variant="b"] .fvx{--fh:340px}
+  [data-variant="b"] .fvx__layer{padding:56px 0 32px}
+  [data-variant="b"] .fvx__in{padding-inline:20px}
+  [data-variant="b"] .fv1.fvx .fvx__in--1{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:32px}
+  [data-variant="b"] .fv1.fvx .fv1__art{width:100%;justify-content:space-between;gap:12px}
+  [data-variant="b"] .fv1.fvx .rock{font-size:clamp(40px,13.5vw,72px);margin-right:0}
+  [data-variant="b"] .fv1.fvx .horns{width:clamp(64px,19vw,104px)}
+  [data-variant="b"] .fv1.fvx .fv1__side{width:100%}
+  [data-variant="b"] .fv1.fvx .frow{font-size:22px}
+  [data-variant="b"] .fv1.fvx .fv__list{display:grid;grid-template-columns:repeat(2,max-content);column-gap:40px}
+}
+@media (max-width:760px){
+  /* «Учёба»: на телефоне — организатор мелко над названием, год справа */
+  [data-variant="b"] .study{margin-top:56px}
+  [data-variant="b"] .study__list li{grid-template-columns:minmax(0,1fr) auto;column-gap:16px;padding:14px 0;font-size:15px}
+  [data-variant="b"]{--gutter:16px;--r:28px;--media-h:200px;--hero-s:12px;--hero-S:32px;--hero-M:72px;--exp-gap:64px;--fgap:80px}
+  [data-variant="b"] .page-wrapper{padding:104px 16px 0}
+  /* плавающая плашка со ссылками */
+  [data-variant="b"] .sidebar__links{top:12px;gap:6px;padding:6px 6px 6px 8px}
+  [data-variant="b"] .sidebar__links .pill{padding:5px 10px;font-size:14px;line-height:18px}
+  /* первый экран */
+  [data-variant="b"] .hero__h{font-size:34px}
+  [data-variant="b"] .hero__b,[data-variant="b"] .hero__sub,[data-variant="b"] .hero__lead{display:block;text-box:trim-both cap alphabetic}
+  [data-variant="b"] .sidebar__photo{margin-bottom:32px}
+  [data-variant="b"] .hero__sub{margin:20px auto 0}
+  [data-variant="b"] .hero__lead{margin-top:28px}
+  [data-variant="b"] .hero__lead{font-size:16px;line-height:1.5}
+  [data-variant="b"] .sidebar__photo{width:132px;height:160px;border-radius:52px}
+  [data-variant="b"] .anchors{grid-template-columns:minmax(0,1fr);row-gap:28px;margin-top:56px}
+  [data-variant="b"] .anchors br{display:none}
+  [data-variant="b"] .anchors li{flex-direction:row;align-items:center;text-align:left;gap:16px;font-size:16px}
+  [data-variant="b"] .anchors li>span:not(.anchors__ico){max-width:none}
+  [data-variant="b"] .anchors__ico{width:48px;height:48px;flex:none}
+  [data-variant="b"] .anchors__ico svg{width:22px;height:22px}
+  [data-variant="b"] .anchors__emo{font-size:22px}
+  /* карточки кейсов */
+  [data-variant="b"] .kcard__panel--b{--kc-edge:24px;--kc-gap:24px;--kc-pair:20px;--kc-row:12px;--kc-col:16px}
+  [data-variant="b"] .kcard__media{height:calc(var(--media-h) + var(--r))}
+  /* «Опыт» */
+  [data-variant="b"] .exp--v6 .work__head h2,[data-variant="b"] .exp--v6 .work__head h3{font-size:26px}
+  [data-variant="b"] .exp--v6 .xp__head{grid-template-columns:28px minmax(0,1fr) 36px;column-gap:12px;padding:20px 0}
+  [data-variant="b"] .exp--v6 .xp__icon{width:36px;height:36px}
+  [data-variant="b"] .exp--v6 .xp__main{grid-template-columns:minmax(0,1fr);row-gap:4px}
+  [data-variant="b"] .exp--v6 .xp__co{font-size:22px}
+  [data-variant="b"] .xp__sub{text-align:left;white-space:normal}
+  [data-variant="b"] .xp__body{padding:4px 0 24px 40px}
+}
+@media (max-width:560px){
+  /* шторка кейса */
+  [data-variant="b"] .sheet__close{background:#fff}
+  [data-variant="b"] .kcard__title{font-size:24px}
+  [data-variant="b"] .case__title{font-size:24px;max-width:none}
+  [data-variant="b"] .sheet__in{padding-inline:20px}
+  [data-variant="b"] .case__sheet-facts div{grid-template-columns:minmax(0,1fr);row-gap:2px}
+  [data-variant="b"] .case__sheet-facts dd a,[data-variant="b"] .case__sheet-facts dd.is-inline a{display:inline;white-space:normal;overflow:visible;text-overflow:clip}
+  [data-variant="b"] .case__metrics{grid-template-columns:minmax(0,1fr)}
+  [data-variant="b"] .kcard__panel--b .kcard__facts{grid-template-columns:minmax(0,1fr)}
+  [data-variant="b"] .kcard__panel--b{--kc-row:16px}
+  [data-variant="b"] .kcard__panel--b .kcard__facts>div{grid-template-columns:minmax(0,1fr);row-gap:8px}
+  [data-variant="b"] .kcard__panel--b .kcard__facts dt{color:rgba(15,15,15,.5);font-size:13px}
+  [data-variant="b"] .kcard__panel--b .kcard__facts dd{color:rgba(15,15,15,.85)}
+}
+@media (max-width:400px){
+  [data-variant="b"] .hero__h{font-size:30px}
+  [data-variant="b"] .case__title{font-size:20px}
+  [data-variant="b"] .kcard__title{font-size:20px}
+  [data-variant="b"] .kcard__panel--b{--kc-edge:20px;--kc-gap:20px}
+  [data-variant="b"] .sidebar__links .pill{padding:5px 8px;font-size:13px}
+}
+
+/* шторка: «Следующий кейс» — зазор от линии до строки = зазору от строки до низа окна */
+[data-variant="b"] .case__next{padding-top:32px}
+[data-variant="b"] .sheet__in{padding-bottom:32px}
+
+/* ===== B: обложки и нижние блоки всех кейсов — единая компоновка (образец ATS) =====
+   Медиа: градиент (--cover-grad) с отступом сверху и по бокам; картинка в стеклянной рамке; низ обрезается.
+   Нижний блок: один ровный цвет (data-cpanel). Переключатели пишут data-атрибуты на .kcard (см. site.js). */
+:root{
+  --cover-pad-y:32px;
+  --cover-pad-x:36px;
+  --cover-frame:6px;
+  --cover-r:20px;   /* единый радиус обложек: среднее между 14 (ATS/FMS/Федерация) и 26 (Папки) */
+  --cover-grad:linear-gradient(90deg, #FDF7FE 0%, #EFE6FD 45%, #D9CBF7 100%);
+}
+[data-variant="b"] .kcard .kcard__media{display:block;padding:var(--cover-pad-y) var(--cover-pad-x) 0;background:var(--cover-grad);overflow:hidden}
+[data-variant="b"] .kcard .kcard__media img{display:block;box-sizing:border-box;width:100%;height:auto;max-width:none;object-fit:initial;padding:var(--cover-frame);background:rgba(255,255,255,.22);border:.5px solid rgba(255,255,255,.7);border-radius:var(--cover-r);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 18px 40px -22px rgba(21,19,15,.3)}
+@media (max-width:760px){[data-variant="b"] .kcard .kcard__media{--cover-pad-x:24px;--cover-frame:4px;--cover-r:16px}}
+@media (max-width:400px){[data-variant="b"] .kcard .kcard__media{--cover-pad-x:20px;--cover-frame:3px;--cover-r:14px}}
+
+/* тон: цвета градиента (--t-*) */
+.kcard[data-ctone="1"]{--t-a:#FDF7FE;--t-b:#EFE6FD;--t-c:#D9CBF7;--t-d:#C7B0F9;--t-acc:#D6C6F6;--t-pink:#F4DCF7}
+.kcard[data-ctone="2"]{--t-a:#FBF6FF;--t-b:#EADFFB;--t-c:#CDBBF3;--t-d:#B9A3EE;--t-acc:#C9B5F2;--t-pink:#EFD8F5}
+.kcard[data-ctone="3"]{--t-a:#F8F6FD;--t-b:#E6E6F7;--t-c:#C9CDF0;--t-d:#AFB6E8;--t-acc:#BFC6EE;--t-pink:#E9DDF6}
+.kcard[data-ctone="4"]{--t-a:#FFF7FA;--t-b:#F9E3F0;--t-c:#E9C9EB;--t-d:#D9B0E3;--t-acc:#E3BDE8;--t-pink:#FBDDEB}
+.kcard[data-ctone="5"]{--t-a:#F7F4FD;--t-b:#ECE6FA;--t-c:#D7CCF5;--t-d:#C4B3EE;--t-acc:#CCBFF2;--t-pink:#EEE1F8}
+/* форма градиента */
+.kcard[data-cgrad="1"]{--cover-grad:linear-gradient(90deg, var(--t-a) 0%, var(--t-b) 45%, var(--t-c) 100%)}
+.kcard[data-cgrad="2"]{--cover-grad:linear-gradient(135deg, var(--t-a) 0%, var(--t-b) 50%, var(--t-c) 100%)}
+.kcard[data-cgrad="3"]{--cover-grad:radial-gradient(120% 100% at 100% 0%, var(--t-acc) 0%, rgba(0,0,0,0) 60%), var(--t-a)}
+.kcard[data-cgrad="4"]{--cover-grad:radial-gradient(60% 80% at 0% 100%, var(--t-pink) 0%, rgba(0,0,0,0) 70%), radial-gradient(70% 90% at 100% 0%, var(--t-acc) 0%, rgba(0,0,0,0) 70%), var(--t-a)}
+.kcard[data-cgrad="5"]{--cover-grad:linear-gradient(180deg, var(--t-a) 0%, var(--t-b) 60%, var(--t-d) 100%)}
+/* нижний блок: плоский цвет */
+[data-variant="b"] .kcard[data-cpanel="1"] .kcard__panel--b{background:#FCF5F9}
+[data-variant="b"] .kcard[data-cpanel="2"] .kcard__panel--b{background:#EFE4FC}
+[data-variant="b"] .kcard[data-cpanel="3"] .kcard__panel--b{background:#E9EDF9}
+[data-variant="b"] .kcard[data-cpanel="4"] .kcard__panel--b{background:#FAEAF3}
+[data-variant="b"] .kcard[data-cpanel="5"] .kcard__panel--b{background:#E8E4FA}
+/* блок управления (вычитка) */
+.cover-ctl{position:fixed;left:16px;bottom:16px;z-index:50;display:flex;flex-direction:column;gap:10px;align-items:stretch;max-height:calc(100vh - 32px);overflow:auto;padding:12px;border-radius:18px;background:rgba(255,255,255,.95);border:1px solid rgba(21,19,15,.14);box-shadow:0 12px 32px -16px rgba(21,19,15,.35);font:500 12px/1.2 var(--f-body, system-ui)}
+.cover-ctl__ver{font-size:10px;letter-spacing:.04em;color:#8a8680}
+.cover-ctl__grp{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.cover-ctl__grp+.cover-ctl__grp{padding-top:10px;border-top:1px solid rgba(21,19,15,.12)}
+.cover-ctl__name{padding:0;border:0;background:none;font:inherit;font-weight:700;font-size:13px;color:#15130F;cursor:pointer;text-align:left}
+.cover-ctl__row{display:flex;flex-wrap:wrap;gap:4px;align-items:center;max-width:232px}
+.cover-ctl__lbl{width:100%;font-size:10px;color:#8a8680}
+.cover-ctl button[data-k]{width:26px;height:26px;padding:0;border-radius:50%;border:1px solid rgba(21,19,15,.35);background:#fff;color:#15130F;font:inherit;cursor:pointer}
+.cover-ctl button[data-k="n"]{width:20px;height:20px;border:1px solid rgba(21,19,15,.18);background:var(--base)}
+.cover-ctl button[data-k].is-on{outline:2px solid #15130F;outline-offset:1px}
+
+/* плоский фон (переключатель «Фон»): светлый цвет под картинкой и более насыщенный нижний блок — пара на кейс */
+[data-variant="b"] .kcard[data-cbg="1"] .kcard__media{background:var(--flat-light)}
+[data-variant="b"] .kcard[data-cbg="1"] .kcard__panel--b{background:var(--flat-dark)}
+
+/* пять наборов пар на кейс (переключатель «Пара»): 1 — самый контрастный, 5 — самый мягкий */
+/* пары: панель = база × p, подложка под картинкой = база × p/2 (ровно вдвое легче); p растёт с номером пары */
+.kcard[data-cbg="1"]{--flat-dark:color-mix(in srgb, var(--base) calc(var(--p) * 100%), #fff);--flat-light:color-mix(in srgb, var(--base) calc(var(--p) * 50%), #fff)}
+.kcard[data-cpk="1"]{--p:.10}
+.kcard[data-cpk="2"]{--p:.14}
+.kcard[data-cpk="3"]{--p:.18}
+.kcard[data-cpk="4"]{--p:.22}
+.kcard[data-cpk="5"]{--p:.27}
+/* базовые цвета тональностей (по ним считаются пара и подложка; те же селекторы красят свотчи в панели) */
+/* ATS — 7 (зафиксирована тональность 2) */
+[data-cpair="ats"]{--base:#8F78D8}
+[data-cpair="ats"][data-ctn="2"]{--base:#A875D6}
+[data-cpair="ats"][data-ctn="3"]{--base:#6F78D6}
+[data-cpair="ats"][data-ctn="4"]{--base:#8E88B4}
+[data-cpair="ats"][data-ctn="5"]{--base:#C07AC4}
+[data-cpair="ats"][data-ctn="6"]{--base:#7D93D0}
+[data-cpair="ats"][data-ctn="7"]{--base:#B0709E}
+[data-cpair="ats"][data-ctn="8"]{--base:#F28C3C}
+[data-cpair="ats"][data-ctn="9"]{--base:#E8A33D}
+[data-cpair="ats"][data-ctn="10"]{--base:#D9714A}
+[data-cpair="ats"][data-ctn="11"]{--base:#C9506B}
+[data-cpair="ats"][data-ctn="12"]{--base:#E06A8C}
+[data-cpair="ats"][data-ctn="13"]{--base:#B9863C}
+[data-cpair="ats"][data-ctn="14"]{--base:#5E6B7C}
+[data-cpair="ats"][data-ctn="15"]{--base:#3FA7C4}
+[data-cpair="ats"][data-ctn="16"]{--base:#C4553A}
+[data-cpair="ats"][data-ctn="17"]{--base:#8A7A5C}
+/* Папки — 1–10 прежний набор, 11–20 новые: розовые, коралловые, терракотовые, коричневые */
+[data-cpair="folders"]{--base:#E5484D}
+[data-cpair="folders"][data-ctn="2"]{--base:#EE6352}
+[data-cpair="folders"][data-ctn="3"]{--base:#C93A55}
+[data-cpair="folders"][data-ctn="4"]{--base:#D9825B}
+[data-cpair="folders"][data-ctn="5"]{--base:#F0A35E}
+[data-cpair="folders"][data-ctn="6"]{--base:#E6B04B}
+[data-cpair="folders"][data-ctn="7"]{--base:#E5779F}
+[data-cpair="folders"][data-ctn="8"]{--base:#CF4F7E}
+[data-cpair="folders"][data-ctn="9"]{--base:#BF5B45}
+[data-cpair="folders"][data-ctn="10"]{--base:#F29B8B}
+[data-cpair="folders"][data-ctn="11"]{--base:#F7A8C4}
+[data-cpair="folders"][data-ctn="12"]{--base:#EC6F9A}
+[data-cpair="folders"][data-ctn="13"]{--base:#C8286A}
+[data-cpair="folders"][data-ctn="14"]{--base:#8E1F43}
+[data-cpair="folders"][data-ctn="15"]{--base:#FF6F61}
+[data-cpair="folders"][data-ctn="16"]{--base:#FFB08A}
+[data-cpair="folders"][data-ctn="17"]{--base:#C8643C}
+[data-cpair="folders"][data-ctn="18"]{--base:#A3402C}
+[data-cpair="folders"][data-ctn="19"]{--base:#C98A4B}
+[data-cpair="folders"][data-ctn="20"]{--base:#8A5A44}
+/* Папки — 21–31: выбранные из набора Федерации — шафран, роза, бледно-розовый, ржавчина, рубин, малина, фуксия, латте, лён, слива, хаки */
+[data-cpair="folders"][data-ctn="21"]{--base:#F2B705}
+[data-cpair="folders"][data-ctn="22"]{--base:#E8529A}
+[data-cpair="folders"][data-ctn="23"]{--base:#F3B5C8}
+[data-cpair="folders"][data-ctn="24"]{--base:#B5532B}
+[data-cpair="folders"][data-ctn="25"]{--base:#C4122F}
+[data-cpair="folders"][data-ctn="26"]{--base:#D6246E}
+[data-cpair="folders"][data-ctn="27"]{--base:#E040A0}
+[data-cpair="folders"][data-ctn="28"]{--base:#C8A27A}
+[data-cpair="folders"][data-ctn="29"]{--base:#B9AE8C}
+[data-cpair="folders"][data-ctn="30"]{--base:#7A3B69}
+[data-cpair="folders"][data-ctn="31"]{--base:#7C7A4B}
+/* Папки — 32–41: холодные оттенки — аквамарин, глубокая бирюза, циан, лёд, василёк, стальной синий, сланцево-синий, индиго, морская волна, ледяная сирень */
+[data-cpair="folders"][data-ctn="32"]{--base:#3CC9B5}
+[data-cpair="folders"][data-ctn="33"]{--base:#17A2A8}
+[data-cpair="folders"][data-ctn="34"]{--base:#25B7D3}
+[data-cpair="folders"][data-ctn="35"]{--base:#7CC4E8}
+[data-cpair="folders"][data-ctn="36"]{--base:#6C8EF5}
+[data-cpair="folders"][data-ctn="37"]{--base:#5B7FA6}
+[data-cpair="folders"][data-ctn="38"]{--base:#4C6A8A}
+[data-cpair="folders"][data-ctn="39"]{--base:#5A55D6}
+[data-cpair="folders"][data-ctn="40"]{--base:#2E8B8B}
+[data-cpair="folders"][data-ctn="41"]{--base:#9AA8F0}
+/* Папки — 42–51: красные в холодном оттенке (с синим подтоном) — карминный, рубин, клюква, гранат, вишнёвое вино, малиновый красный, холодный алый, розово-красный, бордо-фуксия, арбузный */
+[data-cpair="folders"][data-ctn="42"]{--base:#DC143C}
+[data-cpair="folders"][data-ctn="43"]{--base:#B3123F}
+[data-cpair="folders"][data-ctn="44"]{--base:#A5183C}
+[data-cpair="folders"][data-ctn="45"]{--base:#8F1D3A}
+[data-cpair="folders"][data-ctn="46"]{--base:#7B1E3A}
+[data-cpair="folders"][data-ctn="47"]{--base:#D12B55}
+[data-cpair="folders"][data-ctn="48"]{--base:#E0204D}
+[data-cpair="folders"][data-ctn="49"]{--base:#E23B66}
+[data-cpair="folders"][data-ctn="50"]{--base:#B02A5E}
+[data-cpair="folders"][data-ctn="51"]{--base:#F0627E}
+/* Папки — 52–61: холодные фиолетовые (синий подтон) — ночной фиолет, чернильный, ультрафиолет, индиго-фиолет, холодная фиалка, ирис, холодный аметист, васильково-сиреневый, холодная глициния, ледяная лаванда */
+[data-cpair="folders"][data-ctn="52"]{--base:#6B4EFF}
+[data-cpair="folders"][data-ctn="53"]{--base:#7A5CFF}
+[data-cpair="folders"][data-ctn="54"]{--base:#5B47F0}
+[data-cpair="folders"][data-ctn="55"]{--base:#6F5BD0}
+[data-cpair="folders"][data-ctn="56"]{--base:#8068F5}
+[data-cpair="folders"][data-ctn="57"]{--base:#5E5CE6}
+[data-cpair="folders"][data-ctn="58"]{--base:#7D72FF}
+[data-cpair="folders"][data-ctn="59"]{--base:#6A63F2}
+[data-cpair="folders"][data-ctn="60"]{--base:#8B7BFF}
+[data-cpair="folders"][data-ctn="61"]{--base:#7458E8}
+/* Федерация — 1–10 прежний набор, 11–20 новые: от лимонного через оранжевый и красный к малине */
+[data-cpair="federation"]{--base:#F2B705}
+[data-cpair="federation"][data-ctn="2"]{--base:#E8529A}
+[data-cpair="federation"][data-ctn="3"]{--base:#9E2B4A}
+[data-cpair="federation"][data-ctn="4"]{--base:#F08A8A}
+[data-cpair="federation"][data-ctn="5"]{--base:#C98B2E}
+[data-cpair="federation"][data-ctn="6"]{--base:#E9D83A}
+[data-cpair="federation"][data-ctn="7"]{--base:#A8692F}
+[data-cpair="federation"][data-ctn="8"]{--base:#E0403A}
+[data-cpair="federation"][data-ctn="9"]{--base:#F3B5C8}
+[data-cpair="federation"][data-ctn="10"]{--base:#B5532B}
+[data-cpair="federation"][data-ctn="11"]{--base:#F2D400}
+[data-cpair="federation"][data-ctn="12"]{--base:#FFC400}
+[data-cpair="federation"][data-ctn="13"]{--base:#F29D00}
+[data-cpair="federation"][data-ctn="14"]{--base:#FF8A1F}
+[data-cpair="federation"][data-ctn="15"]{--base:#F0502D}
+[data-cpair="federation"][data-ctn="16"]{--base:#E5252A}
+[data-cpair="federation"][data-ctn="17"]{--base:#C4122F}
+[data-cpair="federation"][data-ctn="18"]{--base:#D6246E}
+[data-cpair="federation"][data-ctn="19"]{--base:#E040A0}
+[data-cpair="federation"][data-ctn="20"]{--base:#FF8C7A}
+/* Федерация — 21–30: графитовые и нейтральные, плюс несколько других оттенков */
+[data-cpair="federation"][data-ctn="21"]{--base:#4A4F57}
+[data-cpair="federation"][data-ctn="22"]{--base:#5E6B7C}
+[data-cpair="federation"][data-ctn="23"]{--base:#5B5249}
+[data-cpair="federation"][data-ctn="24"]{--base:#8E99A6}
+[data-cpair="federation"][data-ctn="25"]{--base:#3A4250}
+[data-cpair="federation"][data-ctn="26"]{--base:#C8A27A}
+[data-cpair="federation"][data-ctn="27"]{--base:#B9AE8C}
+[data-cpair="federation"][data-ctn="28"]{--base:#20B2AA}
+[data-cpair="federation"][data-ctn="29"]{--base:#7A3B69}
+[data-cpair="federation"][data-ctn="30"]{--base:#7C7A4B}
+/* Федерация — 31–40: из цветов выделенного скриншота — лаванда пузыря, сирень, розовая сирень и орхидея аватара «Избранное» (#C94FAE) */
+[data-cpair="federation"][data-ctn="31"]{--base:#8E7CF0}
+[data-cpair="federation"][data-ctn="32"]{--base:#A98BF2}
+[data-cpair="federation"][data-ctn="33"]{--base:#B07EEA}
+[data-cpair="federation"][data-ctn="34"]{--base:#C07AE0}
+[data-cpair="federation"][data-ctn="35"]{--base:#C94FAE}
+[data-cpair="federation"][data-ctn="36"]{--base:#D272BA}
+[data-cpair="federation"][data-ctn="37"]{--base:#DE8FD0}
+[data-cpair="federation"][data-ctn="38"]{--base:#E7A0CE}
+[data-cpair="federation"][data-ctn="39"]{--base:#C98FBE}
+[data-cpair="federation"][data-ctn="40"]{--base:#B83A98}
+/* FMS — 10 тональностей зелёного */
+[data-cpair="fms"]{--base:#3FD1A6}
+[data-cpair="fms"][data-ctn="2"]{--base:#12A86B}
+[data-cpair="fms"][data-ctn="3"]{--base:#4DB586}
+[data-cpair="fms"][data-ctn="4"]{--base:#2E9F4F}
+[data-cpair="fms"][data-ctn="5"]{--base:#4CB944}
+[data-cpair="fms"][data-ctn="6"]{--base:#7BD35A}
+[data-cpair="fms"][data-ctn="7"]{--base:#A6D93A}
+[data-cpair="fms"][data-ctn="8"]{--base:#8C9E3A}
+[data-cpair="fms"][data-ctn="9"]{--base:#2B7A57}
+[data-cpair="fms"][data-ctn="10"]{--base:#BFE08A}
+/* FMS — 11: «морская волна» (тёмный бирюзово-зелёный), найден среди холодных тонов Папок; зафиксирован */
+[data-cpair="fms"][data-ctn="11"]{--base:#2E8B8B}
+[data-cpair="ats"][data-ctn="18"]{--base:#8B5CF6}
+[data-cpair="ats"][data-ctn="19"]{--base:#7C3AED}
+[data-cpair="ats"][data-ctn="20"]{--base:#A855F7}
+[data-cpair="ats"][data-ctn="21"]{--base:#C026D3}
+[data-cpair="ats"][data-ctn="22"]{--base:#9D2F9A}
+[data-cpair="ats"][data-ctn="23"]{--base:#D946EF}
+[data-cpair="ats"][data-ctn="24"]{--base:#6D4C9F}
+[data-cpair="ats"][data-ctn="25"]{--base:#4B4B58}
+[data-cpair="ats"][data-ctn="26"]{--base:#6B6F80}
+[data-cpair="ats"][data-ctn="27"]{--base:#3F3A5A}
+[data-cpair="ats"][data-ctn="28"]{--base:#4A5560}
+[data-cpair="ats"][data-ctn="29"]{--base:#3A444F}
+[data-cpair="ats"][data-ctn="30"]{--base:#5C6773}
+[data-cpair="ats"][data-ctn="31"]{--base:#2F3A46}
+[data-cpair="ats"][data-ctn="32"]{--base:#5A4651}
+[data-cpair="ats"][data-ctn="33"]{--base:#6A4552}
+[data-cpair="ats"][data-ctn="34"]{--base:#4E3F4B}
+[data-cpair="ats"][data-ctn="35"]{--base:#4D4962}
+[data-cpair="ats"][data-ctn="36"]{--base:#5A5270}
+[data-cpair="ats"][data-ctn="37"]{--base:#45405A}
+[data-cpair="ats"][data-ctn="38"]{--base:#565C85}
+[data-cpair="ats"][data-ctn="39"]{--base:#4A5078}
+[data-cpair="ats"][data-ctn="40"]{--base:#6A6F9A}
+[data-cpair="ats"][data-ctn="41"]{--base:#5B6490}
+[data-cpair="ats"][data-ctn="42"]{--base:#4E5F8A}
+[data-cpair="ats"][data-ctn="43"]{--base:#5F7094}
+[data-cpair="ats"][data-ctn="44"]{--base:#6B7392}
+[data-cpair="ats"][data-ctn="45"]{--base:#5D5A8C}
+[data-cpair="ats"][data-ctn="46"]{--base:#6D6A9E}
+[data-cpair="ats"][data-ctn="47"]{--base:#48557A}
+[data-cpair="ats"][data-ctn="48"]{--base:#44124F}
+[data-cpair="ats"][data-ctn="49"]{--base:#4B1A5E}
+[data-cpair="ats"][data-ctn="50"]{--base:#5A1F6B}
+[data-cpair="ats"][data-ctn="51"]{--base:#4A1D63}
+[data-cpair="ats"][data-ctn="52"]{--base:#5D2A7A}
+[data-cpair="ats"][data-ctn="53"]{--base:#3E1A5C}
+[data-cpair="ats"][data-ctn="54"]{--base:#6B2B7E}
+[data-cpair="ats"][data-ctn="55"]{--base:#512069}
+[data-cpair="ats"][data-ctn="56"]{--base:#45215A}
+[data-cpair="ats"][data-ctn="57"]{--base:#5B1F73}
+[data-cpair="ats"][data-ctn="58"]{--base:#323F5C}
+[data-cpair="ats"][data-ctn="59"]{--base:#2E4A6E}
+[data-cpair="ats"][data-ctn="60"]{--base:#2F5577}
+[data-cpair="ats"][data-ctn="61"]{--base:#2D6283}
+[data-cpair="ats"][data-ctn="62"]{--base:#356B94}
+[data-cpair="ats"][data-ctn="63"]{--base:#3D74A0}
+[data-cpair="ats"][data-ctn="64"]{--base:#2F7090}
+[data-cpair="ats"][data-ctn="65"]{--base:#3A8099}
+[data-cpair="ats"][data-ctn="66"]{--base:#4A7FB0}
+[data-cpair="ats"][data-ctn="67"]{--base:#5486B8}
+[data-cpair="fms"][data-ctn="12"]{--base:#00C853}
+[data-cpair="fms"][data-ctn="13"]{--base:#16C060}
+[data-cpair="fms"][data-ctn="14"]{--base:#22C55E}
+[data-cpair="fms"][data-ctn="15"]{--base:#12B76A}
+[data-cpair="fms"][data-ctn="16"]{--base:#00A86B}
+[data-cpair="fms"][data-ctn="17"]{--base:#2ECC71}
+[data-cpair="fms"][data-ctn="18"]{--base:#0FB45A}
+[data-cpair="fms"][data-ctn="19"]{--base:#1FD18B}
+[data-cpair="fms"][data-ctn="20"]{--base:#00BF63}
+[data-cpair="fms"][data-ctn="21"]{--base:#3DDC84}
+[data-cpair="fms"][data-ctn="22"]{--base:#7ED957}
+[data-cpair="fms"][data-ctn="23"]{--base:#9BE564}
+[data-cpair="fms"][data-ctn="24"]{--base:#A8E063}
+[data-cpair="fms"][data-ctn="25"]{--base:#B5E655}
+[data-cpair="fms"][data-ctn="26"]{--base:#8FD14F}
+[data-cpair="fms"][data-ctn="27"]{--base:#6FCF4A}
+[data-cpair="fms"][data-ctn="28"]{--base:#5EC83A}
+[data-cpair="fms"][data-ctn="29"]{--base:#B8E04A}
+[data-cpair="fms"][data-ctn="30"]{--base:#C5EA5A}
+[data-cpair="fms"][data-ctn="31"]{--base:#A2D94A}
+[data-cpair="fms"][data-ctn="32"]{--base:#34D058}
+[data-cpair="fms"][data-ctn="33"]{--base:#4CD964}
+[data-cpair="fms"][data-ctn="34"]{--base:#3DDC6E}
+[data-cpair="fms"][data-ctn="35"]{--base:#2FD27A}
+[data-cpair="fms"][data-ctn="36"]{--base:#55E08A}
+[data-cpair="fms"][data-ctn="37"]{--base:#69DB7C}
+[data-cpair="fms"][data-ctn="38"]{--base:#7BE495}
+[data-cpair="fms"][data-ctn="39"]{--base:#43C86E}
+[data-cpair="fms"][data-ctn="40"]{--base:#27C56B}
+[data-cpair="fms"][data-ctn="41"]{--base:#1FBF75}
+[data-cpair="fms"][data-ctn="42"]{--base:#1A5F66}
+[data-cpair="fms"][data-ctn="43"]{--base:#2F8F6F}
+[data-cpair="fms"][data-ctn="44"]{--base:#2E9FA8}
+[data-cpair="fms"][data-ctn="45"]{--base:#3E7FA3}
+[data-cpair="fms"][data-ctn="46"]{--base:#4FB89A}
+[data-cpair="fms"][data-ctn="47"]{--base:#1F7A5E}
+[data-cpair="fms"][data-ctn="48"]{--base:#5AB4C4}
+[data-cpair="fms"][data-ctn="49"]{--base:#3B9A7A}
+[data-cpair="fms"][data-ctn="50"]{--base:#26B5A4}
+[data-cpair="fms"][data-ctn="51"]{--base:#6AA89B}
+[data-cpair="autotech"]{--base:#4C8FD6}
+
+
+/* ===== ATS: обложка слоями — рамка на .kcover, три строки кандидатов появляются в одном из режимов (data-anim: now / a / b / c) ===== */
+[data-variant="b"] .kcard .kcard__media .kcover{display:block;box-sizing:border-box;width:100%;padding:var(--cover-frame);background:rgba(255,255,255,.22);border:.5px solid rgba(255,255,255,.7);border-radius:var(--cover-r);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 18px 40px -22px rgba(21,19,15,.3)}
+.kcover__stage{position:relative;width:100%;overflow:hidden;border-radius:calc(var(--cover-r) - var(--cover-frame));background:#fff}
+[data-variant="b"] .kcard .kcard__media .kcover img{display:block;box-sizing:border-box;max-width:none;padding:0;background:none;border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;object-fit:fill}
+[data-variant="b"] .kcard .kcard__media .kcover img.kcover__base{width:100%;height:100%;position:absolute;inset:0}
+[data-variant="b"] .kcard .kcard__media .kcover img.kcover__row{position:absolute}
+/* время и ритм — одним местом: пауза до старта, длительность строки, шаг между строками, высота подъёма */
+.kcover{--sp:1;--k-delay:calc(.5s / var(--sp));--k-dur:calc(1.3s / var(--sp));--k-step:calc(.85s / var(--sp));--k-rise:26px}
+.kcover.is-armed .kcover__row{will-change:opacity,transform}
+/* «Было»: пустота → строки выплывают снизу */
+.kcover[data-anim="now"].is-armed .kcover__row{opacity:0;transform:translateY(var(--k-rise))}
+.kcover[data-anim="now"].is-armed.is-play .kcover__row{animation:kRow var(--k-dur) cubic-bezier(.22,.7,.2,1) calc(var(--k-delay) + var(--i) * var(--k-step)) both}
+@keyframes kRow{from{opacity:0;transform:translateY(var(--k-rise))}to{opacity:1;transform:none}}
+/* А: «фокус» — строки с самого начала на месте, размытые и бледные; по очереди становятся резкими */
+.kcover[data-anim="a"].is-armed .kcover__row{opacity:.32;filter:blur(12px);transform:translateY(10px)}
+.kcover[data-anim="a"].is-armed.is-play .kcover__row{animation:kFocus var(--k-dur) cubic-bezier(.22,.7,.2,1) calc(var(--k-delay) + var(--i) * var(--k-step)) both}
+@keyframes kFocus{from{opacity:.32;filter:blur(12px);transform:translateY(10px)}to{opacity:1;filter:blur(0);transform:none}}
+/* Б: скелетон — серые заглушки на местах строк, затем заглушка уступает место строке */
+.kcover__sk{position:absolute;overflow:hidden;pointer-events:none;opacity:0}
+.kcover__sk svg{display:block;width:100%;height:100%}
+.kcover__sk::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.75) 50%,transparent 70%);transform:translateX(-100%);animation:kShim 1.9s ease-in-out infinite}
+@keyframes kShim{to{transform:translateX(100%)}}
+.kcover[data-anim="b"].is-armed .kcover__sk{opacity:1}
+.kcover[data-anim="b"].is-armed .kcover__row{opacity:0}
+.kcover[data-anim="b"].is-armed.is-play .kcover__row{animation:kSkRow var(--k-dur) cubic-bezier(.22,.7,.2,1) calc(var(--k-delay) + var(--i) * var(--k-step)) both}
+.kcover[data-anim="b"].is-armed.is-play .kcover__sk{animation:kSkOut calc(var(--k-dur) * .8) ease calc(var(--k-delay) + var(--i) * var(--k-step) + .1s) both}
+@keyframes kSkRow{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes kSkOut{from{opacity:1}to{opacity:0}}
+/* В: от скролла — прозрачность и подъём считаются в JS по положению карточки (--ro у каждой строки) */
+.kcover[data-anim="c"].is-armed .kcover__row{opacity:var(--ro,0);transform:translateY(calc((1 - var(--ro,0)) * var(--k-rise)))}
+@media (prefers-reduced-motion:reduce){.kcover .kcover__row{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}.kcover__sk{display:none}}
+/* панель: выбор варианта анимации */
+.cover-ctl button[data-a]{padding:5px 10px;border-radius:999px;border:1px solid rgba(21,19,15,.35);background:#fff;color:#15130F;font:inherit;cursor:pointer}
+.cover-ctl button[data-a].is-on{outline:2px solid #15130F;outline-offset:1px}
+.cover-ctl__hint{font-size:10px;line-height:1.35;color:#8a8680;max-width:232px}
+
+/* скелетон-обложки (Федерация, Папки, FMS): зоны непрозрачные, поэтому подложка заглушки — свой цвет зоны; стекло рамки то же, что у ATS */
+.kcover--sk .kcover__sk{pointer-events:none}
+/* рамка обложек (все кейсы): плотнее и белее прежнего стекла — заливка 70 % белого, чтобы интерфейс отделялся от фона */
+[data-variant="b"] .kcard .kcard__media .kcover,[data-variant="b"] .kcard .kcard__media > img{background:rgba(255,255,255,.7);border-color:rgba(255,255,255,.95);box-shadow:inset 0 1px 0 #fff,0 18px 40px -22px rgba(21,19,15,.3)}
+/* ATS: три строки скелетона проявляются одновременно, без поочерёдного появления */
+#case-ats .kcover{--k-step:0s;--k-dur:calc(3.04s / var(--sp))}
+/* панель: эмодзи-кнопки и прокрутка, если не помещается в окно */
+.cover-ctl{max-height:calc(100vh - 32px);overflow-y:auto}
+.cover-ctl button.cover-ctl__emo{padding:4px 7px;border-radius:10px;border:1px solid rgba(21,19,15,.25);background:#fff;font-size:18px;line-height:1.1;cursor:pointer;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.cover-ctl button.cover-ctl__emo.is-on{outline:2px solid #15130F;outline-offset:1px}
+
+/* плашка контактов: прячется при скролле вниз, возвращается при скролле вверх (≥ 60 px) и всегда видна у верха страницы */
+[data-variant="b"] .sidebar__links{transition:transform .35s cubic-bezier(.22,.7,.2,1),opacity .25s ease,visibility 0s}
+[data-variant="b"] .sidebar__links.is-tucked{transform:translate(-50%,calc(-100% - 40px));opacity:0;visibility:hidden;pointer-events:none;transition:transform .35s cubic-bezier(.22,.7,.2,1),opacity .25s ease,visibility 0s linear .35s}
+@media (prefers-reduced-motion:reduce){[data-variant="b"] .sidebar__links,[data-variant="b"] .sidebar__links.is-tucked{transition:none}}
+[data-variant="b"] .work__head--sub{padding-bottom:16px}
+[data-variant="b"] .work__head h3{line-height:1.35}
+
+/* ===== Опыт · bento (пробный блок) ===== */
+.xpb{display:none;max-width:var(--container);margin:0 auto;padding:120px 0 0} /* bento-«Опыт» скрыт по решению автора; вернуть — убрать display:none */
+.xpb__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;gap:12px;margin-top:28px}
+.xpb__c{background:#F4F5F7;border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:10px}
+.xpb__c--lead{grid-column:1/-1;padding:26px 28px}
+.xpb__h{display:flex;align-items:center;gap:12px}
+.xpb__h h3{margin:0;white-space:nowrap;font-size:20px;line-height:1.2;font-weight:600}
+.xpb__logo{width:36px;height:36px;border-radius:10px;background:var(--m);display:grid;place-items:center;font-weight:700;font-size:16px}
+.xpb__when{margin-left:auto;font-size:13px;color:var(--ink-55);white-space:nowrap}
+.xpb__role{margin:0;font-size:13.5px;color:var(--ink-55)}
+.xpb__about{margin:4px 0 0;font-size:15px;line-height:1.5;color:var(--ink-70)}
+.xpb__stats{display:flex;flex-wrap:wrap;gap:8px 28px;margin:auto 0 0;padding-top:12px}
+.xpb__stats div{max-width:180px}
+.xpb__stats dt{font-size:24px;line-height:1.1;font-weight:600;letter-spacing:-.01em}
+.xpb__c--lead .xpb__stats dt{font-size:38px}.xpb__c--lead .xpb__stats{gap:8px 48px}.xpb__c--lead .xpb__stats div{max-width:260px}.xpb__c--lead .xpb__about{max-width:560px}
+.xpb__stats dd{margin:4px 0 0;font-size:12.5px;line-height:1.35;color:var(--ink-55)}
+.xpb__links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px}
+.xpb__links .xp__link{margin:0}
+.xpb__links:empty{display:none}
+.xpb__items{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.xpb__items li{font-size:14px;line-height:1.5;color:var(--ink-70)}
+.xpb__items b{color:var(--ink);font-weight:600}
+.xpb__c:nth-child(4),.xpb__c:nth-child(5){grid-column:auto}
+@media (max-width:760px){.xpb{padding:72px 16px 0}.xpb__grid{grid-template-columns:minmax(0,1fr)}.xpb__h{flex-wrap:wrap}.xpb__when{margin-left:48px;flex-basis:100%;order:3;margin-top:-6px}.xpb__stats div{max-width:none}.xpb__c--lead{grid-column:auto}.xpb__c{padding:22px;border-radius:22px}.xpb__when{font-size:12px}}
+
+/* стрелка ↗ у ссылок в таблице фактов шторки и в кнопке «Проект» — единая, чуть меньше */
+.lnk__ar{display:inline-block;margin-left:5px;font-size:.78em;line-height:1;text-decoration:none}
+[data-variant="b"] .kcard__btns .pill--outline span{font-size:11px;line-height:1}
+
+/* зум изображения в шторке */
+.zoom{position:fixed;inset:0;z-index:500;background:rgba(15,15,15,.82);display:grid;place-items:center;padding:24px;cursor:zoom-out}
+.zoom__img{max-width:96vw;max-height:92vh;width:auto;height:auto;object-fit:contain;border-radius:12px;background:#fff;cursor:default;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.zoom__x{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:28px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0 0 3px}
+.zoom__x:hover{background:var(--ink);color:#fff}
+
+/* таблица фактов в шторке (Behance / Период / Команда / Платформы) — вес 400 во всех кейсах */
+[data-variant="b"] .sheet__in .case__sheet-facts dt,[data-variant="b"] .sheet__in .case__sheet-facts dd,[data-variant="b"] .sheet__in .case__sheet-facts div{font-weight:400}
+
+/* слайдер «до/после»: обычный курсор (зум на нём отключён) */
+.sheet__in .ba,.sheet__in .ba *{cursor:default!important}
