@@ -363,6 +363,7 @@ img{display:block;max-width:100%}
 [data-variant="b"] .anchors__ico{width:60px;height:60px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
 [data-variant="b"] .anchors__ico svg{width:26px;height:26px;fill:var(--ink)}
 [data-variant="b"] .anchors__emo{font-size:26px;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+[data-variant="b"] .hero__emo{display:inline-block;margin-left:.28em;font-size:.82em;line-height:1;vertical-align:.04em;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}   /* высота знака ≈ высота заглавной «И» */
 [data-variant="b"] .work{padding-top:88px}
 
 /* ===== B: карточки — очень холодные, прозрачные слоистые фоны (у каждой своя механика и оттенок) ===== */
