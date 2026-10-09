@@ -1365,7 +1365,7 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 .intro__x{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px var(--paper);transition:transform .2s}
 .intro__x:hover{transform:scale(1.08)}
 .intro__x svg{width:16px;height:16px}
-.intro[data-state="bubble"] .intro__x{left:-6px;top:-6px}
+.intro[data-state="bubble"] .intro__x{right:-6px;left:auto;top:-6px}
 .intro[data-state="full"] .intro__x{right:10px;top:10px;left:auto;background:rgba(15,15,15,.5);box-shadow:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @media (max-width:760px){.intro{--d:84px;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom))}.intro__cc{font-size:13px}}
 @media (pointer:coarse){.intro__b{width:40px;height:40px}.intro__x{width:32px;height:32px}.intro__prog{height:40px}}
