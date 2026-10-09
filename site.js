@@ -315,6 +315,25 @@ const STUDY = [
   ['Как делать продукт. JTBD','Иван Замесин','2021']
 ];
 
+/* ============================ I18N ============================
+   Английская версия (/en/): en/index.html подключает en/site.en.js → window.I18N = { root, dict, intro, introCues }.
+   Все строки данных (CASES, EXPERIENCE, STUDY, BENTO) проходят через словарь «русская строка → английская»; пути assets/… получают префикс root.
+   В русской версии window.I18N нет — L() возвращает исходную строку, ничего не меняется. */
+const I18N = window.I18N || null;
+const ROOT = I18N ? I18N.root : '';
+const L = s => (I18N && Object.prototype.hasOwnProperty.call(I18N.dict, s)) ? I18N.dict[s] : s;
+const i18n = v => {
+  if (typeof v === 'string') return Object.prototype.hasOwnProperty.call(I18N.dict, v) ? I18N.dict[v] : /^assets\//.test(v) ? ROOT + v : v.replace(/(\d) %/g, '$1%');
+  if (Array.isArray(v)) return v.map(i18n);
+  if (v && typeof v === 'object') { const o = {}; Object.keys(v).forEach(k => { o[k] = i18n(v[k]); }); return o; }
+  return v;
+};
+if (I18N) {
+  Object.keys(CASES).forEach(k => { CASES[k] = i18n(CASES[k]); });
+  EXPERIENCE.forEach((x, i) => { EXPERIENCE[i] = i18n(x); });
+  STUDY.forEach((x, i) => { STUDY[i] = i18n(x); });
+}
+
 /* ============================ HELPERS ============================ */
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* ==фраза== → <mark class="hl"> (подсветка: максимум 2 на кейс, не дублировать крупные метрики блока результатов, по указанию автора); **фраза** → <strong> (жирное лид-ин и акценты, как в Notion) */
@@ -338,7 +357,7 @@ function armMissing(root) {
   });
 }
 function phFigure(label) {
-  return `<figure><div class="ph"><b>Кадр интерфейса</b><small>${esc(label)}</small></div></figure>`;
+  return `<figure><div class="ph"><b>${L('Кадр интерфейса')}</b><small>${esc(label)}</small></div></figure>`;
 }
 
 /* ============================ CASES ============================
@@ -347,7 +366,7 @@ function phFigure(label) {
 const VARIANT = {};   // все карточки одной компоновки (образец ATS)
 /* тестовый кадр для отладки адаптивного фрейма — временно единый на все карточки,
    пока нет финальных скринов под каждый кейс */
-const SAMPLE_IMG = 'assets/images/shared/sample-hmi.png';
+const SAMPLE_IMG = ROOT + 'assets/images/shared/sample-hmi.png';
 
 const SITES = { federation:'https://mts-link.ru', folders:'https://mts-link.ru', ats:'https://sense-it.ru', autotech:'https://uremont.com' };  // digitalagro — ссылка не задана
 
@@ -405,12 +424,12 @@ const skCover = (p, alt) => {
 };
 function kcard(p, variant) {
   const img = `<img src="${p.tileFrame || SAMPLE_IMG}" alt="${esc(p.title)}" loading="lazy" data-ph="hide">`;
-  const L = p.tileLayers;
+  const TL = p.tileLayers;
   const SK = (w, h) => `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="10" width="${w}" height="${h - 13}" rx="14" fill="#EEF2F5"/><g fill="#fff" stroke="#E3E8EC"><rect x="10" y="40" width="466" height="${h - 50}" rx="12"/><rect x="484" y="40" width="408" height="${h - 50}" rx="12"/><rect x="900" y="40" width="${w - 912}" height="${h - 50}" rx="12"/></g><g fill="#E6EBEF"><rect x="11" y="22" width="80" height="20" rx="10"/><rect x="12" y="50" width="54" height="52" rx="12"/><rect x="79" y="54" width="163" height="14" rx="7"/><rect x="79" y="79" width="90" height="16" rx="8"/><rect x="15" y="106" width="27" height="12" rx="6"/><rect x="52" y="106" width="47" height="12" rx="6"/><rect x="107" y="106" width="29" height="12" rx="6"/><rect x="146" y="106" width="24" height="12" rx="6"/><rect x="176" y="106" width="36" height="12" rx="6"/><rect x="224" y="106" width="16" height="12" rx="6"/><rect x="250" y="106" width="34" height="12" rx="6"/><rect x="294" y="106" width="36" height="12" rx="6"/><rect x="12" y="133" width="142" height="22" rx="8"/><rect x="492" y="50" width="44" height="12" rx="6"/><rect x="546" y="52" width="228" height="14" rx="7"/><rect x="546" y="70" width="198" height="12" rx="6"/><rect x="492" y="87" width="44" height="12" rx="6"/><rect x="546" y="89" width="214" height="14" rx="7"/><rect x="546" y="107" width="178" height="12" rx="6"/><rect x="492" y="124" width="44" height="12" rx="6"/><rect x="546" y="126" width="200" height="14" rx="7"/><rect x="546" y="144" width="186" height="12" rx="6"/><rect x="911" y="52" width="119" height="14" rx="7"/><rect x="1047" y="52" width="122" height="14" rx="7"/><rect x="911" y="87" width="400" height="11" rx="5.5"/><rect x="911" y="103" width="368" height="11" rx="5.5"/><rect x="911" y="119" width="440" height="11" rx="5.5"/></g><rect x="1179" y="24" width="175" height="18" rx="9" fill="#E4DDF4"/></svg>`;
-  const layered = L ? `<div class="kcover" role="img" aria-label="${esc(p.title)}"><div class="kcover__stage" style="aspect-ratio:${L.w}/${L.h}"><img class="kcover__base" src="${L.base}" alt="" loading="lazy" data-ph="hide">` +
-    L.rows.map(([src, y0, y1], i) => { const pos = `left:${(L.x0 / L.w * 100).toFixed(3)}%;top:${(y0 / L.h * 100).toFixed(3)}%;width:${((L.w - L.x0) / L.w * 100).toFixed(3)}%;height:${((y1 - y0) / L.h * 100).toFixed(3)}%`; return `<div class="kcover__sk" style="${pos};--i:${i}">${SK(L.w - L.x0, y1 - y0)}</div><img class="kcover__row" style="${pos};--i:${i}" src="${src}" alt="" loading="lazy" data-ph="hide">`; }).join('') + '</div></div>' : '';
-  const sk = (!L && SKZ[p.slug]) ? skCover(p, p.title) : '';
-  const media = L ? layered : sk ? sk : (variant === 'grey' ? `<span class="frame">${img}</span>` : img);
+  const layered = TL ? `<div class="kcover" role="img" aria-label="${esc(p.title)}"><div class="kcover__stage" style="aspect-ratio:${TL.w}/${TL.h}"><img class="kcover__base" src="${TL.base}" alt="" loading="lazy" data-ph="hide">` +
+    TL.rows.map(([src, y0, y1], i) => { const pos = `left:${(TL.x0 / TL.w * 100).toFixed(3)}%;top:${(y0 / TL.h * 100).toFixed(3)}%;width:${((TL.w - TL.x0) / TL.w * 100).toFixed(3)}%;height:${((y1 - y0) / TL.h * 100).toFixed(3)}%`; return `<div class="kcover__sk" style="${pos};--i:${i}">${SK(TL.w - TL.x0, y1 - y0)}</div><img class="kcover__row" style="${pos};--i:${i}" src="${src}" alt="" loading="lazy" data-ph="hide">`; }).join('') + '</div></div>' : '';
+  const sk = (!TL && SKZ[p.slug]) ? skCover(p, p.title) : '';
+  const media = TL ? layered : sk ? sk : (variant === 'grey' ? `<span class="frame">${img}</span>` : img);
   return `<article class="kcard kcard--${variant}" data-tone="${p.tone}">
     <div class="kcard__media">${media}</div>
     <div class="kcard__panel kcard__panel--b">
@@ -418,8 +437,8 @@ function kcard(p, variant) {
       <p class="kcard__lead">${esc(p.b.lead)}</p>
       ${p.b.rows ? `<dl class="kcard__facts">${p.b.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>` : ''}
       <div class="kcard__btns">
-        <button type="button" class="pill pill--dark" data-case="${p.slug}">Кейс</button>
-        ${SITES[p.slug] ? `<a class="pill pill--outline" href="${SITES[p.slug]}" target="_blank" rel="noopener">Проект <span aria-hidden="true">↗</span></a>` : (p.slug === 'ats' ? `<span class="pill pill--outline is-soon" aria-disabled="true" title="Ссылка скоро появится">Проект <span aria-hidden="true">↗</span></span>` : '')}
+        <button type="button" class="pill pill--dark" data-case="${p.slug}">${L('Кейс')}</button>
+        ${SITES[p.slug] ? `<a class="pill pill--outline" href="${SITES[p.slug]}" target="_blank" rel="noopener">${L('Проект')} <span aria-hidden="true">↗</span></a>` : (p.slug === 'ats' ? `<span class="pill pill--outline is-soon" aria-disabled="true" title="${L('Ссылка скоро появится')}">${L('Проект')} <span aria-hidden="true">↗</span></span>` : '')}
       </div>
     </div>
   </article>`;
@@ -430,7 +449,7 @@ function kcard(p, variant) {
 const sbPhoto = document.querySelector('#sidebar-photo');
 if (sbPhoto) {
   const imgB = document.createElement('img');
-  imgB.src = 'assets/images/profile/slava-2.jpg'; imgB.alt = 'Вячеслав Соколов'; imgB.className = 'ph-b';
+  imgB.src = ROOT + 'assets/images/profile/slava-2.jpg'; imgB.alt = L('Вячеслав Соколов'); imgB.className = 'ph-b';
   sbPhoto.appendChild(imgB);
 }
 
@@ -450,6 +469,7 @@ const BENTO = {
   'DigitalAgro':{ m:'#BFEBC7', stats:[['−20 %','ручных действий'],['+8 %','Activation Rate']] },
   'Uremont':    { m:'#C9E4FA', stats:[['+11 %','ARPU'],['+9 %','конверсия в лид']] }
 };
+if (I18N) Object.keys(BENTO).forEach(k => { const v = i18n(BENTO[k]); delete BENTO[k]; BENTO[L(k)] = v; });   // ключи — названия компаний
 $('#xpb-grid').innerHTML = EXPERIENCE.map((x, i) => {
   const b = BENTO[x.co] || { m:'#eee', stats:[] };
   return `<article class="xpb__c${i === 0 ? ' xpb__c--lead' : ''}" style="--m:${b.m}">
@@ -457,7 +477,7 @@ $('#xpb-grid').innerHTML = EXPERIENCE.map((x, i) => {
     <p class="xpb__role">${esc(x.role)}</p>
     <p class="xpb__about">${esc(x.about)}</p>
         <dl class="xpb__stats">${b.stats.map(([n, l]) => `<div><dt>${esc(n)}</dt><dd>${esc(l)}</dd></div>`).join('')}</dl>
-    <div class="xpb__links">${(i === 0 ? x.cases || [] : []).map(([k, l]) => `<button type="button" class="xp__link" data-case="${k}">${l ? 'Кейс: ' + esc(l) : 'Открыть кейс'} <span aria-hidden="true">↗</span></button>`).join('')}</div>
+    <div class="xpb__links">${(i === 0 ? x.cases || [] : []).map(([k, l]) => `<button type="button" class="xp__link" data-case="${k}">${l ? L('Кейс: ') + esc(l) : L('Открыть кейс')} <span aria-hidden="true">↗</span></button>`).join('')}</div>
   </article>`;
 }).join('');
 
@@ -475,7 +495,7 @@ $('#xp-list').innerHTML = EXPERIENCE.map((x, i) => `
       <div class="xp__inner"><div class="xp__body">
         <p class="xp__about">${esc(x.about)}</p>
         <ul class="xp__items">${x.items.map(t => `<li>${t}</li>`).join('')}</ul>
-        ${(x.cases || []).map(([k, l]) => `<button type="button" class="xp__link" data-case="${k}">${l ? 'Кейс: ' + esc(l) : 'Открыть кейс'} <span aria-hidden="true">↗</span></button>`).join('')}
+        ${(x.cases || []).map(([k, l]) => `<button type="button" class="xp__link" data-case="${k}">${l ? L('Кейс: ') + esc(l) : L('Открыть кейс')} <span aria-hidden="true">↗</span></button>`).join('')}
       </div></div>
     </div>
   </div>`).join('');
@@ -521,12 +541,12 @@ const nextOf = slug => ORDER[(ORDER.indexOf(slug) + 1) % ORDER.length];
    Работает в любом контейнере (шторка, будущая модалка): разметка из compareHTML(), поведение — делегированием, инициализация не нужна.
    В данных кейса: { compare: ['до.webp', 'после.webp'], cap: 'подпись', alt: 'описание' } (в story.parts или story.fig). */
 function compareHTML({ compare: [before, after], cap, alt }) {
-  const a = esc(alt || cap || 'Сравнение до и после');
-  return `<figure class="ba-fig"><div class="ba" role="slider" tabindex="0" aria-label="${a}: слева до, справа после" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" style="--ba:50%">
-    <img class="ba__img ba__img--before" src="${before}" alt="До: ${a}" draggable="false" loading="lazy" decoding="async">
-    <img class="ba__img ba__img--after" src="${after}" alt="После: ${a}" draggable="false" loading="lazy" decoding="async">
+  const a = esc(alt || cap || L('Сравнение до и после'));
+  return `<figure class="ba-fig"><div class="ba" role="slider" tabindex="0" aria-label="${a}${L(': слева до, справа после')}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" style="--ba:50%">
+    <img class="ba__img ba__img--before" src="${before}" alt="${L('До: ')}${a}" draggable="false" loading="lazy" decoding="async">
+    <img class="ba__img ba__img--after" src="${after}" alt="${L('После: ')}${a}" draggable="false" loading="lazy" decoding="async">
     <span class="ba__handle" aria-hidden="true"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12h17M8 7.5 3.5 12 8 16.5M16 7.5l4.5 4.5-4.5 4.5"/></svg></i></span>
-    <span class="ba__lab ba__lab--before" aria-hidden="true">До</span><span class="ba__lab ba__lab--after" aria-hidden="true">После</span>
+    <span class="ba__lab ba__lab--before" aria-hidden="true">${L('До')}</span><span class="ba__lab ba__lab--after" aria-hidden="true">${L('После')}</span>
   </div>${cap ? `<figcaption>${esc(cap)}</figcaption>` : ''}</figure>`;
 }
 (() => {
@@ -561,11 +581,11 @@ function caseHTML(p) {
   const next = CASES[nextOf(p.slug)];
   const media = p.media
     ? p.media.map(([src, cap]) => `<figure><img src="${src}" alt="${esc(cap)}" loading="lazy" data-ph="hide"><figcaption>${esc(cap)}</figcaption></figure>`).join('')
-    : [[`assets/images/${p.slug}/frame-1.jpg`, '1600 × 900'], [`assets/images/${p.slug}/frame-2.jpg`, '1600 × 900']]
+    : [[`${ROOT}assets/images/${p.slug}/frame-1.jpg`, '1600 × 900'], [`${ROOT}assets/images/${p.slug}/frame-2.jpg`, '1600 × 900']]
         .map(([, label]) => phFigure(label)).join('');
   const fig = x => x.compare ? compareHTML(x) : (([src, cap, alt, href]) => `<figure>${/\.mp4$/.test(src) ? `<video src="${src}" aria-label="${esc(alt || cap)}" autoplay muted loop playsinline preload="metadata" disablepictureinpicture data-ph="hide"></video>` : `<img src="${src}" alt="${esc(alt || cap)}" loading="lazy" decoding="async" data-ph="hide">`}${cap ? `<figcaption>${capHTML(cap, href)}</figcaption>` : ''}</figure>`)(x);
   /* значения в таблице фактов — со строчной буквы, кроме аббревиатур (PM, QA) и iOS */
-  const lc = t => t.replace(/(^|[\s·—–,-])([А-ЯЁA-Z][а-яёa-z]+)/g, (m, a, w) => a + (w === 'iOS' ? w : w[0].toLowerCase() + w.slice(1)));
+  const lc = I18N ? (t => t) : t => t.replace(/(^|[\s·—–,-])([А-ЯЁA-Z][а-яёa-z]+)/g, (m, a, w) => a + (w === 'iOS' ? w : w[0].toLowerCase() + w.slice(1)));
   const lnk = (u, l, n) => `<a href="${u}" target="_blank" rel="noopener">${esc(n > 1 ? lc(l) : u.replace(/^https?:\/\/(www\.)?/, '').replace(/\?.*$/, '').replace(/\/$/, ''))}<span class="lnk__ar" aria-hidden="true">↗</span></a>`;
   /* Figma временно скрыта в карточке кейса (данные в CASES остаются): убрать метку из HIDE_LINKS — и ссылки вернутся.
      Скрываем по метке, не по адресу: «Исследование» тоже ведёт на figma.com. Несколько ссылок в строке — в одну линию через запятую. */
@@ -577,9 +597,9 @@ function caseHTML(p) {
       .map(([k, ls]) => [k, ls.filter(([l]) => !HIDE_LINKS.includes(l)), ls.length])
       .filter(([, vis]) => vis.length)
       .map(([k, vis, n]) => [k, vis.map(([l, u]) => lnk(u, l, n)).join(vis.length > 1 ? ', ' : ''), vis.length > 1 ? 'is-inline' : '']),
-    ...(HIDE_PERIOD ? [] : [['Период', esc(lc(p.period))]]),
-    p.team ? ['Команда', esc(p.team)] : null,
-    p.platform ? ['Платформы', esc(lc(p.platform))] : null
+    ...(HIDE_PERIOD ? [] : [[L('Период'), esc(lc(p.period))]]),
+    p.team ? [L('Команда'), esc(p.team)] : null,
+    p.platform ? [L('Платформы'), esc(lc(p.platform))] : null
   ].filter(Boolean);
   const part = x => typeof x === 'string' ? x.split('\n').map(t => `<p>${rich(t)}</p>`).join('')
     : (Array.isArray(x) || x.compare) ? `<div class="case__media">${fig(x)}</div>`
@@ -590,19 +610,19 @@ function caseHTML(p) {
   return `<h2 class="case__title" id="sheet-title">${esc((p.b && p.b.headline) || p.title)}</h2>
     ${p.hideLead ? '' : `<p class="case__lead"><b>${esc(p.type)}.</b> ${esc(p.description)}</p>`}
     <dl class="case__sheet-facts">${facts.map(([k, v, c]) => `<div><dt>${k}</dt><dd${c ? ` class="${c}"` : ''}>${v}</dd></div>`).join('')}</dl>
-    <section class="case__sec"><h3 class="meta">О проекте</h3>${p.about.split('\n').map(t => `<p>${rich(t)}</p>`).join('')}</section>
-    ${p.problem ? `<section class="case__sec"><h3 class="meta">Проблема</h3><p>${rich(p.problem)}</p></section>` : ''}
-    <section class="case__sec"><h3 class="meta">Роль</h3>${p.contribution.split('\n').map(t => `<p>${rich(t)}</p>`).join('')}</section>
-    ${p.story ? p.story.map(story).join('') : `<section class="case__sec"><h3 class="meta">Работа над решением</h3>
+    <section class="case__sec"><h3 class="meta">${L('О проекте')}</h3>${p.about.split('\n').map(t => `<p>${rich(t)}</p>`).join('')}</section>
+    ${p.problem ? `<section class="case__sec"><h3 class="meta">${L('Проблема')}</h3><p>${rich(p.problem)}</p></section>` : ''}
+    <section class="case__sec"><h3 class="meta">${L('Роль')}</h3>${p.contribution.split('\n').map(t => `<p>${rich(t)}</p>`).join('')}</section>
+    ${p.story ? p.story.map(story).join('') : `<section class="case__sec"><h3 class="meta">${L('Работа над решением')}</h3>
       <ol class="case__stages">${p.stages.map(([t, d], i) => `<li><span>${String(i + 1).padStart(2, '0')}</span><div><h4>${esc(t)}</h4><p>${rich(d)}</p></div></li>`).join('')}</ol>
     </section>
     <div class="case__media">${media}</div>`}
-    <section class="case__sec case__results"><h3 class="meta">Результаты</h3>
-      <div class="case__metrics" aria-label="Результаты">${p.metrics.map(([n, c]) => `<div><b>${esc(n)}</b><span>${esc(c)}</span></div>`).join('')}</div>
+    <section class="case__sec case__results"><h3 class="meta">${L('Результаты')}</h3>
+      <div class="case__metrics" aria-label="${L('Результаты')}">${p.metrics.map(([n, c]) => `<div><b>${esc(n)}</b><span>${esc(c)}</span></div>`).join('')}</div>
       ${(p.notes || p.note) ? `<ul class="case__notes">${(p.notes || [p.note]).map(n => `<li class="case__note">${rich(n)}</li>`).join('')}</ul>` : ''}
     </section>
-    ${p.take ? `<section class="case__sec"><h3 class="meta">Что я вынес</h3>${p.take.map(t => `<p>${rich(t)}</p>`).join('')}</section>` : ''}
-    <button class="case__next" type="button" data-case="${next.slug}"><span>Следующий кейс</span><strong>${next.company ? esc(next.company) + ' · ' : ''}${esc(next.type)} →</strong></button>`;
+    ${p.take ? `<section class="case__sec"><h3 class="meta">${L('Что я вынес')}</h3>${p.take.map(t => `<p>${rich(t)}</p>`).join('')}</section>` : ''}
+    <button class="case__next" type="button" data-case="${next.slug}"><span>${L('Следующий кейс')}</span><strong>${next.company ? esc(next.company) + ' · ' : ''}${esc(next.type)} →</strong></button>`;
 }
 function setUrl(slug, method = 'pushState') {
   const u = new URL(location.href);
@@ -936,8 +956,8 @@ window.addEventListener('popstate', () => {
     const inner = img && img.closest('.sheet__in');
     if (!img || !inner || (ZOOM_SLUGS && !ZOOM_SLUGS.includes(inner.dataset.slug)) || img.closest('.ba')) return;
     box = document.createElement('div');
-    box.className = 'zoom'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Увеличенное изображение');
-    box.innerHTML = `<button type="button" class="zoom__x" aria-label="Закрыть">×</button><img class="zoom__img" src="${img.currentSrc || img.src}" alt="${esc(img.alt || '')}">`;
+    box.className = 'zoom'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', L('Увеличенное изображение'));
+    box.innerHTML = `<button type="button" class="zoom__x" aria-label="${L('Закрыть')}">×</button><img class="zoom__img" src="${img.currentSrc || img.src}" alt="${esc(img.alt || '')}">`;
     document.body.appendChild(box);
     box.querySelector('.zoom__x').focus({ preventScroll: true });
   });

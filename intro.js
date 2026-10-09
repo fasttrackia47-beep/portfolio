@@ -3,10 +3,17 @@
    FALLBACK_CUES — копия VTT на случай, когда страница открыта через file:// (fetch заблокирован). При правке VTT обновить и её. */
 (() => {
   'use strict';
-  const SRC = 'assets/video/slava-intro.mp4?v=1';
-  const POSTER = 'assets/video/slava-intro-poster.webp?v=1';
-  const VTT = 'assets/video/slava-intro.ru.vtt?v=1';
-  const FALLBACK_CUES = [[0.259,1.286,"Привет, я Слава."],[1.326,2.441,"Добро пожаловать на мой сайт."],[2.481,3.301,"Я продуктовый дизайнер,"],[3.341,5.286,"а в последнее время ещё и сам собираю прототипы"],[5.326,6.856,"с помощью AI и довожу их до кода."],[6.896,8.219,"Дизайном занимаюсь более шести лет,"],[8.259,9.375,"B2B и B2C:"],[9.415,12.071,"от приложения для агрономов в полях до корпоративных чатов."],[12.111,13.612,"Больше всего люблю сложные продукты"],[13.652,16.012,"и момент, когда видно, что пользователю стало проще."],[16.052,16.901,"Посмотрите проекты,"],[16.941,18.264,"а если захотите что-то обсудить,"],[18.304,19.893,"пишите в Telegram или LinkedIn."],[19.933,20.683,"Пока!"]];
+  const I = window.I18N || null;   // английская версия (/en/): пути с префиксом, субтитры и подписи — из site.en.js
+  const ROOT = I ? I.root : '';
+  const SRC = ROOT + 'assets/video/slava-intro.mp4?v=1';
+  const POSTER = ROOT + 'assets/video/slava-intro-poster.webp?v=1';
+  const VTT = ROOT + 'assets/video/slava-intro.' + (I ? 'en' : 'ru') + '.vtt?v=1';
+  const S = Object.assign({
+    open: 'Видео-визитка: смотреть со звуком', play: 'Воспроизвести', pause: 'Пауза', again: 'Смотреть ещё раз',
+    muteOff: 'Выключить звук', muteOn: 'Включить звук', seek: 'Перемотка', cc: 'Субтитры', close: 'Закрыть видео', collapse: 'Свернуть видео'
+  }, (I && I.intro) || {});
+  const RU_CUES = [[0.259,1.286,"Привет, я Слава."],[1.326,2.441,"Добро пожаловать на мой сайт."],[2.481,3.301,"Я продуктовый дизайнер,"],[3.341,5.286,"а в последнее время ещё и сам собираю прототипы"],[5.326,6.856,"с помощью AI и довожу их до кода."],[6.896,8.219,"Дизайном занимаюсь более шести лет,"],[8.259,9.375,"B2B и B2C:"],[9.415,12.071,"от приложения для агрономов в полях до корпоративных чатов."],[12.111,13.612,"Больше всего люблю сложные продукты"],[13.652,16.012,"и момент, когда видно, что пользователю стало проще."],[16.052,16.901,"Посмотрите проекты,"],[16.941,18.264,"а если захотите что-то обсудить,"],[18.304,19.893,"пишите в Telegram или LinkedIn."],[19.933,20.683,"Пока!"]];
+  const FALLBACK_CUES = (I && I.introCues) || RU_CUES;
 
   try { if (sessionStorage.getItem('introClosed') === '1') return; } catch (e) {}
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -26,20 +33,20 @@
   root.dataset.state = 'bubble';
   root.hidden = true;
   root.innerHTML =
-    '<div class="intro__box" role="button" tabindex="0" aria-label="Видео-визитка: смотреть со звуком">' +
+    '<div class="intro__box" role="button" tabindex="0" aria-label="' + S.open + '">' +
       '<video class="intro__v" poster="' + POSTER + '" playsinline muted loop preload="none" disablepictureinpicture></video>' +
       '<div class="intro__ui">' +
-        '<button class="intro__big" type="button" aria-label="Воспроизвести">' + ico.play + '</button>' +
+        '<button class="intro__big" type="button" aria-label="' + S.play + '">' + ico.play + '</button>' +
         '<p class="intro__cc" aria-hidden="true"></p>' +
         '<div class="intro__bar">' +
-          '<button class="intro__b intro__b--play" type="button" aria-label="Пауза">' + ico.pause + '</button>' +
-          '<button class="intro__b intro__b--mute" type="button" aria-label="Выключить звук">' + ico.on + '</button>' +
-          '<div class="intro__prog" role="slider" tabindex="0" aria-label="Перемотка" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>' +
-          '<button class="intro__b intro__b--cc" type="button" aria-label="Субтитры" aria-pressed="true">' + ico.cc + '</button>' +
+          '<button class="intro__b intro__b--play" type="button" aria-label="' + S.pause + '">' + ico.pause + '</button>' +
+          '<button class="intro__b intro__b--mute" type="button" aria-label="' + S.muteOff + '">' + ico.on + '</button>' +
+          '<div class="intro__prog" role="slider" tabindex="0" aria-label="' + S.seek + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>' +
+          '<button class="intro__b intro__b--cc" type="button" aria-label="' + S.cc + '" aria-pressed="true">' + ico.cc + '</button>' +
         '</div>' +
       '</div>' +
     '</div>' +
-    '<button class="intro__x" type="button" aria-label="Закрыть видео">' +
+    '<button class="intro__x" type="button" aria-label="' + S.close + '">' +
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>';
   document.body.appendChild(root);
 
@@ -67,14 +74,14 @@
   const setPlayUI = () => {
     const ended = v.ended, paused = v.paused;
     bPlay.innerHTML = ended ? ico.replay : paused ? ico.play : ico.pause;
-    bPlay.setAttribute('aria-label', ended ? 'Смотреть ещё раз' : paused ? 'Воспроизвести' : 'Пауза');
+    bPlay.setAttribute('aria-label', ended ? S.again : paused ? S.play : S.pause);
     big.innerHTML = ended ? ico.replay : ico.play;
-    big.setAttribute('aria-label', ended ? 'Смотреть ещё раз' : 'Воспроизвести');
+    big.setAttribute('aria-label', ended ? S.again : S.play);
     root.classList.toggle('is-paused', paused && state() === 'full');
   };
   const setMuteUI = () => {
     bMute.innerHTML = v.muted ? ico.off : ico.on;
-    bMute.setAttribute('aria-label', v.muted ? 'Включить звук' : 'Выключить звук');
+    bMute.setAttribute('aria-label', v.muted ? S.muteOn : S.muteOff);
   };
   const tick = () => {
     const d = v.duration || 0, t = v.currentTime;
@@ -121,15 +128,15 @@
   const expand = () => {
     if (state() === 'full') return;
     load(); setAway(false); root.dataset.state = 'full'; box.removeAttribute('role'); box.removeAttribute('tabindex'); box.removeAttribute('aria-label');
-    xBtn.setAttribute('aria-label', 'Свернуть видео');
+    xBtn.setAttribute('aria-label', S.collapse);
     v.loop = false; v.muted = false; try { v.currentTime = 0; } catch (e) {}
     const p = v.play(); if (p && p.catch) p.catch(() => { v.muted = true; setMuteUI(); const q = v.play(); if (q && q.catch) q.catch(() => {}); });
     setMuteUI(); setPlayUI(); kick(); bPlay.focus({ preventScroll: true });
   };
   const collapse = () => {
     if (state() === 'bubble') return;
-    root.dataset.state = 'bubble'; box.setAttribute('role', 'button'); box.tabIndex = 0; box.setAttribute('aria-label', 'Видео-визитка: смотреть со звуком');
-    xBtn.setAttribute('aria-label', 'Закрыть видео');
+    root.dataset.state = 'bubble'; box.setAttribute('role', 'button'); box.tabIndex = 0; box.setAttribute('aria-label', S.open);
+    xBtn.setAttribute('aria-label', S.close);
     ccEl.dataset.t = ''; ccEl.textContent = '';
     restPoster();   // посмотрел — кружок остаётся на кадре постера, без движения
     setPlayUI(); box.focus({ preventScroll: true });
