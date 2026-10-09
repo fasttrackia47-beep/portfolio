@@ -784,7 +784,7 @@ window.addEventListener('popstate', () => {
 (() => {
   const SHORT = 'в|во|к|ко|с|со|о|об|обо|у|на|по|за|из|от|до|не|ни|но|а|и|я|же|бы|ли|для|при|без|над|под|про|или|как|что|то';
   const RULES = [
-    [new RegExp('(?<![\\p{L}\\p{N}\\-\u2011])(' + SHORT + ') ', 'giu'), '$1\u00A0'],
+    [new RegExp('(^|[^\\p{L}\\p{N}\\-\u2011])(' + SHORT + ') ', 'giu'), '$1$2\u00A0'],   /* без lookbehind (Safari < 16.4); подряд идущие предлоги добирает повтор в fix */
     [/ +(—|–|→)/g, '\u00A0$1'],
     [/(→) +/g, '$1\u00A0'],
     [/(\d\+?) (%|₽|млн|млрд|тыс\.?|мин|сек|мс)(?![\p{L}])/gu, '$1\u00A0$2'],
@@ -792,7 +792,8 @@ window.addEventListener('popstate', () => {
     [/(млн|млрд|тыс\.?) (₽)/g, '$1\u00A0$2']
   ];
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE', 'NOSCRIPT']);
-  const fix = s => RULES.reduce((a, [re, to]) => a.replace(re, to), s);
+  const once = s => RULES.reduce((a, [re, to]) => a.replace(re, to), s);
+  const fix = s => { let p; do { p = s; s = once(s); } while (s !== p); return s; };
   const text = n => { const v = fix(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; };
   const run = root => {
     if (root.nodeType === 3) return text(root);
@@ -947,21 +948,3 @@ window.addEventListener('popstate', () => {
   });
 })();
 
-
-/* ===== неразрывные пробелы после предлогов, союзов и частиц на главной (шторка кейса не затрагивается) ===== */
-(() => {
-  const W = 'в|во|к|ко|с|со|у|о|об|обо|от|до|по|за|из|на|над|под|при|про|для|без|не|ни|но|а|и|я|да|же|ли|бы|или';
-  const mid = new RegExp('(^|[^\\p{L}\\p{N}_])(' + W + ')[ \\t\\n]+(?=\\S)', 'giu');
-  const tail = new RegExp('(^|[^\\p{L}\\p{N}_])(' + W + ')[ \\t\\n]+$', 'iu');
-  const dash = /[ \t\n]+(?=[—–])/g;
-  const fix = (t, hasNext) => {
-    let o = t, p;
-    do { p = o; o = o.replace(mid, '$1$2\u00A0'); } while (o !== p);
-    if (hasNext) o = o.replace(tail, '$1$2\u00A0');
-    return o.replace(dash, '\u00A0');
-  };
-  const root = document.getElementById('main'); if (!root) return;
-  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement && n.parentElement.closest('script,style,svg,textarea') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
-  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
-  nodes.forEach(n => { const v = fix(n.nodeValue, !!n.nextSibling); if (v !== n.nodeValue) n.nodeValue = v; });
-})();

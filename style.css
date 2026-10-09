@@ -1342,8 +1342,8 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 .intro__box{position:relative;width:var(--d);height:var(--d);border-radius:50%;overflow:hidden;background:#d9c9b4;cursor:pointer;box-shadow:0 14px 36px -12px rgba(15,15,15,.45),0 0 0 1px rgba(15,15,15,.08);transition:width .42s cubic-bezier(.2,.7,.2,1),height .42s cubic-bezier(.2,.7,.2,1),border-radius .42s cubic-bezier(.2,.7,.2,1),transform .25s ease;-webkit-tap-highlight-color:transparent}
 .intro[data-state="bubble"] .intro__box:hover{transform:scale(1.05)}
 .intro__box:focus-visible,.intro__b:focus-visible,.intro__x:focus-visible,.intro__prog:focus-visible,.intro__big:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px var(--ink)}
-.intro__v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;background:#d9c9b4;transform-origin:50% 38%;transition:transform .42s cubic-bezier(.2,.7,.2,1)}
-.intro[data-state="bubble"] .intro__v{transform:scale(1.5)}
+.intro__v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 8%;background:#d9c9b4;transform-origin:50% 38%;transition:transform .42s cubic-bezier(.2,.7,.2,1)}
+.intro[data-state="bubble"] .intro__v{transform:none}   /* кадр по ширине кружка без зума: видны плечи и фон */
 .intro[data-state="full"] .intro__box{width:var(--w);height:calc(var(--w)*4/3);border-radius:26px;cursor:default}
 .intro__ui{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .25s ease .15s;background:linear-gradient(to top,rgba(15,15,15,.55),rgba(15,15,15,0) 38%)}
 .intro[data-state="full"] .intro__ui{opacity:1;pointer-events:auto}
@@ -1385,4 +1385,10 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 /* десктоп/планшет (>760): описание в карточке 16px, описание — колонка до 800px (на мобильном без изменений) */
 @media (min-width:761px){
   [data-variant="b"] .kcard__panel--b .kcard__lead{max-width:800px;font-size:16px}   /* заголовок остаётся 700px */
+}
+
+/* десктоп/планшет (>760): перенос заголовков FMS и Autotech. FMS — «−30 %,» поднимается в первую строку; Autotech — в одну строку */
+@media (min-width:761px){
+  [data-variant="b"] #case-fms .kcard__panel--b .kcard__title{max-width:740px}
+  [data-variant="b"] #case-autotech .kcard__panel--b .kcard__title{max-width:none}
 }

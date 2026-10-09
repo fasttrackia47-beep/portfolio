@@ -88,9 +88,18 @@
   };
   const kick = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); };
   const load = () => { if (!loaded) { loaded = true; v.src = SRC; } };
+  /* мобильный: если за 2 с видео не пошло — остаётся постер, загрузка прерывается (экономим трафик); по тапу видео грузится и играет */
+  const STALL_MS = 2000;
+  let stallT = 0;
+  v.addEventListener('playing', () => { clearTimeout(stallT); stallT = 0; });
   const playMutedLoop = () => {
     if (reduce || saveData || done || away) return;
     load(); v.muted = true; v.loop = false; const p = v.play(); if (p && p.catch) p.catch(() => {});
+    if (mobile.matches && !stallT) stallT = setTimeout(() => {
+      stallT = 0;
+      if (state() !== 'bubble' || (!v.paused && v.readyState >= 3)) return;
+      done = true; loaded = false; v.pause(); v.removeAttribute('src'); v.load();
+    }, STALL_MS);
   };
   const restPoster = () => { done = true; v.pause(); try { v.currentTime = POSTER_T; } catch (e) {} };
   /* мобильный: при прокрутке вниз кружок прячется, при прокрутке вверх возвращается */
