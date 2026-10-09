@@ -1334,3 +1334,40 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 
 /* таблица фактов в шторке: без линии под последней строкой (перед «О проекте») */
 [data-variant="b"] .case__sheet-facts>div:last-child{border-bottom:0;padding-bottom:0}
+
+/* ===== видео-визитка (intro.js): кружок справа внизу → плеер 3:4 со звуком ===== */
+.intro{--d:128px;--w:min(340px,calc(100vw - 24px),calc((100dvh - 24px)*.75));position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:150;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.intro[hidden]{display:none}
+.intro.is-ready{opacity:1;transform:none}
+.intro__box{position:relative;width:var(--d);height:var(--d);border-radius:50%;overflow:hidden;background:#d9c9b4;cursor:pointer;box-shadow:0 14px 36px -12px rgba(15,15,15,.45),0 0 0 1px rgba(15,15,15,.08);transition:width .42s cubic-bezier(.2,.7,.2,1),height .42s cubic-bezier(.2,.7,.2,1),border-radius .42s cubic-bezier(.2,.7,.2,1),transform .25s ease;-webkit-tap-highlight-color:transparent}
+.intro[data-state="bubble"] .intro__box:hover{transform:scale(1.05)}
+.intro__box:focus-visible,.intro__b:focus-visible,.intro__x:focus-visible,.intro__prog:focus-visible,.intro__big:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px var(--ink)}
+.intro__v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;background:#d9c9b4;transform-origin:50% 38%;transition:transform .42s cubic-bezier(.2,.7,.2,1)}
+.intro[data-state="bubble"] .intro__v{transform:scale(1.5)}
+.intro[data-state="full"] .intro__box{width:var(--w);height:calc(var(--w)*4/3);border-radius:26px;cursor:default}
+.intro__ui{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .25s ease .15s;background:linear-gradient(to top,rgba(15,15,15,.55),rgba(15,15,15,0) 38%)}
+.intro[data-state="full"] .intro__ui{opacity:1;pointer-events:auto}
+.intro__bar{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:8px}
+.intro__b,.intro__big,.intro__x{display:grid;place-items:center;border:0;padding:0;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.intro__b{width:36px;height:36px;flex:none;border-radius:50%;background:rgba(15,15,15,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s}
+.intro__b:hover{background:rgba(15,15,15,.78)}
+.intro__b svg{width:20px;height:20px;fill:currentColor}
+.intro__b--cc[aria-pressed="false"]{opacity:.55}
+.intro__prog{position:relative;flex:1;height:36px;cursor:pointer;display:flex;align-items:center}
+.intro__prog::before,.intro__prog i{content:"";position:absolute;left:0;right:0;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.intro__prog i{background:#fff;transform:scaleX(0);transform-origin:0 50%;right:0}
+.intro__big{position:absolute;left:50%;top:44%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(15,15,15,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transform:scale(.9);transition:opacity .2s,transform .2s}
+.intro__big svg{width:30px;height:30px;fill:currentColor}
+.intro.is-paused .intro__big{opacity:1;pointer-events:auto;transform:none}
+.intro__cc{position:absolute;left:14px;right:14px;bottom:60px;margin:0;text-align:center;font:500 14px/1.45 var(--f-body);pointer-events:none}
+.intro__cc span{padding:2px 8px;border-radius:8px;background:rgba(15,15,15,.66);color:#fff;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.intro.is-nocc .intro__cc{display:none}
+.intro__x{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px var(--paper);transition:transform .2s}
+.intro__x:hover{transform:scale(1.08)}
+.intro__x svg{width:16px;height:16px}
+.intro[data-state="bubble"] .intro__x{left:-6px;top:-6px}
+.intro[data-state="full"] .intro__x{right:10px;top:10px;left:auto;background:rgba(15,15,15,.5);box-shadow:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+@media (max-width:760px){.intro{--d:84px;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom))}.intro__cc{font-size:13px}}
+@media (pointer:coarse){.intro__b{width:40px;height:40px}.intro__x{width:32px;height:32px}.intro__prog{height:40px}}
+.intro.is-ready.is-away{opacity:0;transform:translateY(28px) scale(.9);pointer-events:none}
+@media (prefers-reduced-motion:reduce){.intro,.intro__box,.intro__v,.intro__ui,.intro__big{transition:none}}
