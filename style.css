@@ -319,7 +319,7 @@ img{display:block;max-width:100%}
 [data-variant="b"] .xp__co{font-size:28px;line-height:1.25;letter-spacing:0}
 [data-variant="b"] .xp__sub{font-size:14px;text-align:right;white-space:nowrap}
 [data-variant="b"] .xp__body{padding:4px 0 36px 60px;max-width:none}
-[data-variant="b"] .xp__about,[data-variant="b"] .xp__items li,[data-variant="b"] .xp__link{font-size:15px}
+[data-variant="b"] .xp__about,[data-variant="b"] .xp__items li,[data-variant="b"] .xp__link{font-size:16px}
 [data-variant="b"] .xp__about,[data-variant="b"] .xp__items{max-width:68ch}
 [data-variant="b"] .xp__items li::before{left:-20px}
 [data-variant="b"] .study__list li{padding:16px 0;font-size:15px}
