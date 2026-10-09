@@ -317,7 +317,7 @@ window.I18N = {
     "После: ": "After: ",
     "Закрыть": "Close",
     "Кадр интерфейса": "Interface frame",
-    "Кейс": "Case study",
+    "Кейс": "View case study",
     "Кейс: ": "Case study: ",
     "Команда": "Team",
     "О проекте": "About the project",
