@@ -113,12 +113,12 @@ const CASES = {
   },
   folders: {
     slug:'folders', company:'МТС Линк', type:'Папки для чатов и каналов', year:'2026', tone:'plum', layout:'main', hideLead:true,
-    tileFrame:'assets/images/folders/00-cover.webp?v=3',
+    tileFrame:'assets/images/folders/00-cover.webp?v=4',
     chip:'Корпоративные коммуникации',
     title:'Как навести порядок в чатах и каналах',
     outcome:'Топ-3 запрос пользователей. Для 21 клиента папки были условием покупки, потенциал этих сделок за первые 6 месяцев 2026 года превышал 25 млн ₽.',
     description:'Для 21 клиента наличие папок было условием покупки МТС Линк. Совокупный потенциал этих сделок за первые 6 месяцев 2026 года превышал 25 млн ₽.',
-    role:'Senior Product Designer · весь кейс', platform:'', period:'Июль – сентябрь 2026',
+    role:'Senior Product Designer · весь кейс', platform:'Web · iOS · Android', period:'Июль – сентябрь 2026',
     team:'1 дизайнер, 1 PM, 8 разработчиков, 4 QA',
     links:[['Материалы',[['Figma','https://www.figma.com/design/XyljjzmxTIrdZ5Bhfu2LKe/Design-project?node-id=21243-18374'],['Исследование','https://www.figma.com/board/QpAm2rsQvbiC84m8EcxSds/Research-chat-rolders?node-id=0-1&p=f&t=XBtbGsFIYSPHixT6-0'],['Функциональная сборка','https://fasttrackia47-beep.github.io/collapse-chat-ui/']]]],
     about:'МТС Линк — платформа для корпоративных коммуникаций. Папки — персональный слой навигации: пользователь собирает чаты и каналы в собственные группы, не меняя структуру коммуникаций.',
@@ -177,7 +177,7 @@ const CASES = {
     title:'Рост CSI до 4.0 и оптимизация полевых обследований',
     outcome:'CSI вырос до 3,5/5 у агрономов и 4/5 у руководителей, Time on Task сократился на ~30 %, ошибок при вводе стало меньше на ~40 %, бизнес-переделок — на ~60 %.',
     description:'Адаптация FMS под условия поля: читаемость, быстрый ввод данных и планирование сезонных работ.',
-    role:'Senior Product Designer', platform:'Web · Mobile', period:'Июль 2022 — Сентябрь 2024',
+    role:'Senior Product Designer', platform:'Web · Android', period:'Июль 2022 — Сентябрь 2024',
     team:'4 дизайнера, 1 PM, 9 разработчиков, 3 QA',
     links:[['Behance',[['Смотреть на Behance','https://www.behance.net/gallery/206700067/AgroTech']]],
            ['Figma',[['Веб-версия','https://www.figma.com/design/XyljjzmxTIrdZ5Bhfu2LKe/Design-project?node-id=20882-61563'],['Мобильное приложение','https://www.figma.com/design/XyljjzmxTIrdZ5Bhfu2LKe/Design-project?node-id=20895-55720']]]],
@@ -234,7 +234,7 @@ const CASES = {
     title:'Как вырастить ARPU при стабильной аудитории 115K+',
     outcome:'ARPU вырос примерно на 11 %: допуслуги ~5 %, персональные уведомления ~4 %, шаг подтверждения номера ~2 %.',
     description:'Платформа обслуживания автомобилей: найти UX-барьеры в воронке и добавить точки монетизации.',
-    role:'UX/UI Designer', platform:'Web', period:'Октябрь 2018 — Ноябрь 2019',
+    role:'UX/UI Designer', platform:'Web · iOS · Android', period:'Октябрь 2018 — Ноябрь 2019',
     team:'3 дизайнера, 1 PM, 8 разработчиков, 2 QA',
     about:'Autotech SaaS-платформа для обслуживания автомобилей (B2C / B2B). Присоединился на этапе работающего продукта.',
     problem:'При стабильной ==MAU около 115K+ ARPU рос медленно==. Конверсия в заявку и доля повторных обращений проседали из-за UX-барьеров и отсутствия понятных точек монетизации. Пользователи путались в сценариях, а сервис не удерживал клиентов на повторный цикл обслуживания.',
@@ -570,12 +570,14 @@ function caseHTML(p) {
   /* Figma временно скрыта в карточке кейса (данные в CASES остаются): убрать метку из HIDE_LINKS — и ссылки вернутся.
      Скрываем по метке, не по адресу: «Исследование» тоже ведёт на figma.com. Несколько ссылок в строке — в одну линию через запятую. */
   const HIDE_LINKS = ['Figma'];
+  /* «Период» скрыт во всех кейсах (непонятно: срок проекта или работы в компании); данные period в CASES остаются. true → строка вернётся */
+  const HIDE_PERIOD = true;
   const facts = [
     ...(p.links || []).filter(([k]) => !HIDE_LINKS.includes(k))
       .map(([k, ls]) => [k, ls.filter(([l]) => !HIDE_LINKS.includes(l)), ls.length])
       .filter(([, vis]) => vis.length)
       .map(([k, vis, n]) => [k, vis.map(([l, u]) => lnk(u, l, n)).join(vis.length > 1 ? ', ' : ''), vis.length > 1 ? 'is-inline' : '']),
-    ['Период', esc(lc(p.period))],
+    ...(HIDE_PERIOD ? [] : [['Период', esc(lc(p.period))]]),
     p.team ? ['Команда', esc(p.team)] : null,
     p.platform ? ['Платформы', esc(lc(p.platform))] : null
   ].filter(Boolean);

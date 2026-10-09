@@ -1323,3 +1323,14 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 
 /* слайдер «до/после»: обычный курсор (зум на нём отключён) */
 .sheet__in .ba,.sheet__in .ba *{cursor:default!important}
+
+/* ===== Мобильные карточки (≤425 px): отступ обложки от края карточки — 20 px слева, справа и сверху. >425 px — прежние значения. ===== */
+@media (max-width:425px){
+  [data-variant="b"] .kcard .kcard__media{--cover-pad-x:20px;--cover-pad-y:20px}
+}
+
+/* «Учёба» скрыта по решению автора; код и данные STUDY сохранены. Вернуть — убрать это правило */
+.study{display:none}
+
+/* таблица фактов в шторке: без линии под последней строкой (перед «О проекте») */
+[data-variant="b"] .case__sheet-facts>div:last-child{border-bottom:0;padding-bottom:0}
