@@ -1381,3 +1381,8 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 
 /* десктоп от 1200px: кружок 164px (планшет 761–1199 — 128px, мобильный ≤760 — 84px) */
 @media (min-width:1200px){.intro{--d:164px}}
+
+/* десктоп/планшет (>760): описание в карточке 16px, описание — колонка до 800px (на мобильном без изменений) */
+@media (min-width:761px){
+  [data-variant="b"] .kcard__panel--b .kcard__lead{max-width:800px;font-size:16px}   /* заголовок остаётся 700px */
+}
