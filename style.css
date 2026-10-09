@@ -1371,3 +1371,10 @@ a:hover > .lnk__ar,a:focus-visible > .lnk__ar{transform:translate(1px,-1px)}
 @media (pointer:coarse){.intro__b{width:40px;height:40px}.intro__x{width:32px;height:32px}.intro__prog{height:40px}}
 .intro.is-ready.is-away{opacity:0;transform:translateY(28px) scale(.9);pointer-events:none}
 @media (prefers-reduced-motion:reduce){.intro,.intro__box,.intro__v,.intro__ui,.intro__big{transition:none}}
+
+/* ===== типографика хиро на мобильном (≤425): заголовок 36px, подзаголовок 20px; эмодзи отделён неразрывным пробелом ===== */
+[data-variant="b"] .hero__emo{margin-left:0}
+@media (max-width:425px){
+  [data-variant="b"][data-type="1"] .hero__h{font-size:36px}
+  [data-variant="b"] .hero__sub{font-size:20px}
+}

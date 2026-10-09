@@ -946,3 +946,22 @@ window.addEventListener('popstate', () => {
     const inner = img.closest('.sheet__in'); img.style.cursor = inner && (!ZOOM_SLUGS || ZOOM_SLUGS.includes(inner.dataset.slug)) && !img.closest('.ba') ? 'zoom-in' : '';
   });
 })();
+
+
+/* ===== неразрывные пробелы после предлогов, союзов и частиц на главной (шторка кейса не затрагивается) ===== */
+(() => {
+  const W = 'в|во|к|ко|с|со|у|о|об|обо|от|до|по|за|из|на|над|под|при|про|для|без|не|ни|но|а|и|я|да|же|ли|бы|или';
+  const mid = new RegExp('(^|[^\\p{L}\\p{N}_])(' + W + ')[ \\t\\n]+(?=\\S)', 'giu');
+  const tail = new RegExp('(^|[^\\p{L}\\p{N}_])(' + W + ')[ \\t\\n]+$', 'iu');
+  const dash = /[ \t\n]+(?=[—–])/g;
+  const fix = (t, hasNext) => {
+    let o = t, p;
+    do { p = o; o = o.replace(mid, '$1$2\u00A0'); } while (o !== p);
+    if (hasNext) o = o.replace(tail, '$1$2\u00A0');
+    return o.replace(dash, '\u00A0');
+  };
+  const root = document.getElementById('main'); if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement && n.parentElement.closest('script,style,svg,textarea') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => { const v = fix(n.nodeValue, !!n.nextSibling); if (v !== n.nodeValue) n.nodeValue = v; });
+})();
